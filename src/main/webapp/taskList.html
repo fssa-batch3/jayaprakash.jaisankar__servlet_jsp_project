@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+  
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <!-- Loop through tasks and generate rows -->
+        <% for (Task task : tasks) { %>
+            <tr>
+                <td><%= task.getId() %></td>
+                <td><%= task.getTaskName() %></td>
+                <td><%= task.getTaskDetails() %></td>
+                <td><a href="editTask?id=<%= task.getId() %>">Edit</a></td>
+                <td><a href="deleteTask?id=<%= task.getId() %>">Delete</a></td>
+            </tr>
+        <% } %>
+    </table>
+    <a href="createTask.html">Create New Task</a>
+</body>
+</html>
