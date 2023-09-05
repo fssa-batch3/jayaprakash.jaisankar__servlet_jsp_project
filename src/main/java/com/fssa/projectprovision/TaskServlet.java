@@ -71,10 +71,14 @@ public class TaskServlet extends HttpServlet {
             if (created) {
                 response.setStatus(HttpServletResponse.SC_CREATED);
                 response.getWriter().write("Task created successfully");
+                
+                // Redirect to the /listTasks servlet
+                response.sendRedirect(request.getContextPath() + "/listTasks");
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Failed to create task");
             }
+            
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

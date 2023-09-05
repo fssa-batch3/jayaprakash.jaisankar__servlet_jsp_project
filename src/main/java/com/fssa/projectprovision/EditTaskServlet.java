@@ -42,6 +42,7 @@ public class EditTaskServlet extends HttpServlet {
                 response.getWriter().write("Invalid Task ID format.");
                 return;
             }
+            
 
             // Retrieve the task to be edited
             Task task = taskService.getTaskById((int) taskId);

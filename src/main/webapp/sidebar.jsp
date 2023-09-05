@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
- <link rel="stylesheet" href="../assets/css/style.css">
+ <link rel="stylesheet" href="assets/css/style.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -27,7 +27,7 @@
   <ul class="nav-links">
     <li></li>
     <li>
-      <a href="pages/mytodo.html">
+      <a href="home.jsp">
         <i class="bx bx-task"></i>
         <span class="link_name">My project's</span>
       </a>

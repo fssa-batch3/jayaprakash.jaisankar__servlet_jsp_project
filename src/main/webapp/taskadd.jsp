@@ -5,7 +5,14 @@
     <meta charset="UTF-8">
     <title>Create Task</title>
     <style>
-    /* styles.css */
+   /* styles.css */
+
+/* Reset some default styles for form elements */
+form, input, textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -30,6 +37,9 @@ h1 {
 form {
     display: grid;
     grid-gap: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -56,6 +66,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+   
     </style>
     
 </head>

@@ -26,9 +26,11 @@
       </div>
 
       <div class="search-add-task">
+      <a href="taskadd.jsp">
         <button class="addtask" id="addtask" type="button">
           <i class="bx bx-plus"></i>&nbsp;Add project task
         </button>
+        </a>
         <i class="bx bx-search"></i
         ><input
           class="form-control mr-sm-2"
@@ -266,7 +268,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="assets/js/popup.js"></script>
+
 </body>
 </html>
     

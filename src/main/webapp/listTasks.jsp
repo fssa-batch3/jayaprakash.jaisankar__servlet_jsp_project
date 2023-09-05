@@ -6,9 +6,39 @@
 <head>
     <meta charset="UTF-8">
     <title>List of Tasks</title>
+    <style>
+    table {
+    border-collapse: collapse;
+    width: 80%; /* Reduce the table width to 80% of the container */
+    margin: 20px auto; /* Center the table horizontally and provide 20px margin at the top */
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* CSS for links */
+a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+    </style>
 </head>
 <body>
-    <h1>List of Tasks</h1>
+<jsp:include page="sidebar.jsp"></jsp:include>
+
     <table border="1">
         <tr>
             <th>Task Name</th>
@@ -20,7 +50,6 @@
             <th>Project Name</th>
             <th>Task Priority</th>
             <th>Task Tags</th>
-             <th>TODO ID</th>
             <th>Actions</th> <!-- Add a column for actions -->
             <!-- Add more table headers for other task properties -->
         </tr>
@@ -38,9 +67,11 @@
                 <td><%= task.getProjectName() %></td>
                 <td><%= task.getTaskPriority() %></td>
                 <td><%= task.getTaskTags() %></td>
-                 <td><%= task.getTodoId() %></td>
                 <td>
                     <!-- View Task Link -->
+  <!-- Add Task Link -->
+                <a href=" addmilestone.jsp?taskId=<%= task.getId() %>">Add</a>
+
 
                     <!-- Edit Task Link -->
                     <a href="editTask?id=<%= task.getId() %>">Edit</a>

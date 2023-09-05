@@ -1,4 +1,4 @@
-package com.fssa.bookapp.servlet;
+package com.fssa.projectprovision;
 
 import com.fssa.projectprovision.dao.MilestoneDAO;
 import com.fssa.projectprovision.exception.ServiceException;
@@ -19,7 +19,7 @@ public class AddMilestoneServlet extends HttpServlet {
     @Override
     public void init() {
         // Initialize the MilestoneService with the appropriate MilestoneDAO implementation
-        milestoneService = new MilestoneService(new MilestoneDAO()); // Replace with your actual implementation
+        milestoneService = new MilestoneService(new MilestoneDAO()); 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -27,22 +27,31 @@ public class AddMilestoneServlet extends HttpServlet {
         LocalDate date = LocalDate.parse(request.getParameter("date"));
         LocalTime time = LocalTime.parse(request.getParameter("time"));
         boolean reminder = request.getParameter("reminder") != null;
+        String taskIdParam = request.getParameter("taskId");
+        int taskId = Integer.parseInt(taskIdParam);
+
+
 
         Milestone milestone = new Milestone();
         milestone.setTaskText(task);
         milestone.setTaskDate(date);
         milestone.setTaskTime(time);
         milestone.setRemainder(reminder);
+        milestone.setTasks_id(taskId);
 
         try {
             boolean created = milestoneService.insertMilestone(milestone);
             if (created) {
                 response.setStatus(HttpServletResponse.SC_CREATED);
-                response.getWriter().write("Milestone added successfully");
+                response.getWriter().write("Task created successfully");
+                
+                // Redirect to the /listTasks servlet
+                response.sendRedirect(request.getContextPath() + "/projectTasksWithMilestones");
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().write("Failed to add milestone");
+                response.getWriter().write("Failed to create task");
             }
+            
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

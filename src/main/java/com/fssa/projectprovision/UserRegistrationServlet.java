@@ -51,7 +51,7 @@ public class UserRegistrationServlet extends HttpServlet {
             String resultMessage = userService.registerUser(user);
             if ("Registration Successful".equals(resultMessage)) {
                 // Redirect to the login page after successful registration
-                response.sendRedirect(request.getContextPath() + "/login.jsp");
+                response.sendRedirect(request.getContextPath() + "/projectprovisionlogin.jsp");
             } else {
                 response.getWriter().write(resultMessage);
             }

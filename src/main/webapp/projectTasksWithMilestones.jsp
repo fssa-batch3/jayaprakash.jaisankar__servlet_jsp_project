@@ -5,10 +5,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>List of Milestones</title>
+    <title>List of Project Tasks with Milestones</title>
 </head>
 <body>
-    <h1>List of Milestones</h1>
+    <h1>List of Project Tasks with Milestones</h1>
     <table border="1">
         <tr> 
             <th>Task Text</th>
@@ -16,27 +16,25 @@
             <th>Task Time</th>
             <th>Is Reminder</th>
             <th>Task ID</th>
-            <th>Actions</th>
         </tr>
         <%
-           List<Milestone> milestoneList = (List<Milestone>) request.getAttribute("milestoneList");
-           if (milestoneList != null && !milestoneList.isEmpty()) {
-               for (Milestone milestone : milestoneList) {
+           List<Milestone> projectTasks = (List<Milestone>) request.getAttribute("projectTasks");
+           if (projectTasks != null && !projectTasks.isEmpty()) {
+               for (Milestone milestone : projectTasks) {
         %>
            <tr>
                <td><%= milestone.getTaskText() %></td>
                <td><%= milestone.getTaskDate() %></td>
                <td><%= milestone.getTaskTime() %></td>             
-               <td><%= milestone.getisReminder() %></td>
-               <td><%= milestone.getTasks_id() %></td>
-               <td><!-- Add actions here if needed --></td>
+               <td><%= milestone.isRemainder() %></td>
+               <td><%= milestone.gettasks_id1() %></td>
            </tr>
         <%
                }
            } else {
         %>
            <tr>
-               <td colspan="6">No milestones available.</td>
+               <td colspan="4">No project tasks with milestones available.</td>
            </tr>
         <%
            }
