@@ -262,6 +262,34 @@
 
 
     </section>
+<script>
+    // Function to load tasks based on filter, sort, and search
+    function loadTasks() {
+        const sortCriteria = document.getElementById("sort").value;
+        const filterCriteria = document.getElementById("filter").value;
+        const searchKeyword = document.getElementById("searchbarfilter").value;
+
+        // Make an AJAX request to the servlet with the filter, sort, and search parameters
+        fetch(`/listTasks?sort=${sortCriteria}&filter=${filterCriteria}&search=${searchKeyword}`)
+            .then(response => response.json())
+            .then(data => {
+                // Update the todo-container with the retrieved tasks
+                document.getElementById("todo-container").innerHTML = data;
+            })
+            .catch(error => {
+                console.error("Error loading tasks: ", error);
+            });
+    }
+
+    // Attach event listeners to filter, sort, and search elements
+    document.getElementById("sort").addEventListener("change", loadTasks);
+    document.getElementById("filter").addEventListener("change", loadTasks);
+    document.getElementById("searchbarfilter").addEventListener("input", loadTasks);
+
+    // Initial load of tasks
+    loadTasks();
+</script>
+    
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

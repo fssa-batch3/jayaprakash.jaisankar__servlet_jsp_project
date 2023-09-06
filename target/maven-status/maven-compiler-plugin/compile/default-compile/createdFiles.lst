@@ -1,7 +1,0 @@
-com\fssa\bookapp\servlet\SignupServlet.class
-com\fssa\bookapp\servlet\LoginServlet.class
-com\fssa\bookapp\servlet\UserDAO.class
-LoginServlet.class
-com\fssa\bookapp\servlet\RegistrationServlet.class
-com\fssa\bookapp\servlet\TaskServlet.class
-com\fssa\bookapp\servlet\Login1Servlet.class

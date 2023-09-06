@@ -27,9 +27,10 @@
                <td><%= milestone.getTaskText() %></td>
                <td><%= milestone.getTaskDate() %></td>
                <td><%= milestone.getTaskTime() %></td>             
-               <td><%= milestone.getisReminder() %></td>
+               <td><%= milestone.getIsRemainder() %></td>
+
                <td><%= milestone.getTasks_id() %></td>
-               <td><!-- Add actions here if needed --></td>
+               
            </tr>
         <%
                }

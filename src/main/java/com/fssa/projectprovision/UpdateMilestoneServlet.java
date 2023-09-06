@@ -1,6 +1,7 @@
 package com.fssa.projectprovision;
 
 import com.fssa.projectprovision.dao.MilestoneDAO;
+import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.Milestone;
 import com.fssa.projectprovision.service.MilestoneService;
@@ -13,8 +14,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@WebServlet("/AddMilestoneServlet")
-public class AddMilestoneServlet extends HttpServlet {
+@WebServlet("/updatemilestone")
+public class UpdateMilestoneServlet extends HttpServlet {
 
     private MilestoneService milestoneService;
 
@@ -25,32 +26,26 @@ public class AddMilestoneServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Get task ID from the form parameter
+        // Get the updated milestone details from the form
         int taskId = Integer.parseInt(request.getParameter("taskId"));
-
-        // Retrieve other milestone details from the form
         String taskText = request.getParameter("taskText");
         LocalDate taskDate = LocalDate.parse(request.getParameter("taskDate"));
         LocalTime taskTime = LocalTime.parse(request.getParameter("taskTime"));
         boolean isReminder = Boolean.parseBoolean(request.getParameter("isReminder"));
 
-        Milestone milestone = new Milestone(taskId, taskId, taskText, taskDate, taskTime, isReminder);
+        Milestone updatedMilestone = new Milestone(taskId, taskId, taskText, taskDate, taskTime, isReminder);
 
         try {
-            boolean created = milestoneService.insertMilestone(milestone);
-            if (created) {
-                response.setStatus(HttpServletResponse.SC_CREATED);
-                response.getWriter().write("Milestone created successfully");
-                response.sendRedirect(request.getContextPath() + "/projectTasksWithMilestones");
-                
+            boolean updated = milestoneService.updateMilestone(updatedMilestone);
+
+            if (updated) {
+                response.sendRedirect("/listmilestones"); // Redirect to the list page after successful update
             } else {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().write("Failed to create milestone");
+                response.getWriter().write("Failed to update milestone");
             }
-        } catch (ServiceException e) {
+        } catch (ServiceException | DAOException e) {
             e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Failed to add milestone: " + e.getMessage());
+            response.getWriter().write("Failed to update milestone: " + e.getMessage());
         }
     }
 }

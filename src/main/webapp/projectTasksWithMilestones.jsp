@@ -15,7 +15,7 @@
             <th>Task Date</th>
             <th>Task Time</th>
             <th>Is Reminder</th>
-            <th>Task ID</th>
+            <th>Action</th>
         </tr>
         <%
            List<Milestone> projectTasks = (List<Milestone>) request.getAttribute("projectTasks");
@@ -26,15 +26,20 @@
                <td><%= milestone.getTaskText() %></td>
                <td><%= milestone.getTaskDate() %></td>
                <td><%= milestone.getTaskTime() %></td>             
-               <td><%= milestone.isRemainder() %></td>
-               <td><%= milestone.gettasks_id1() %></td>
+               <td><%= milestone.getIsRemainder() %></td>
+                  <td>
+                     <!-- Edit Task Link -->
+                    <a href="editmilestone?id=<%= milestone.getId() %>">Edit</a>
+                    <!-- Delete Task Link -->
+                    <a href="deletemilestone?id=<%= milestone.getId() %>">Delete</a>
+               </td>
            </tr>
         <%
                }
            } else {
         %>
            <tr>
-               <td colspan="4">No project tasks with milestones available.</td>
+               <td colspan="5">No project tasks with milestones available.</td>
            </tr>
         <%
            }

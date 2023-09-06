@@ -26,7 +26,7 @@ public class ListTasksServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException,                                               IOException {
         try {
             // Retrieve the list of tasks from the database using the TaskService or TaskDAO
             List<Task> taskList = taskService.getAllTasks(); // Replace with the appropriate method

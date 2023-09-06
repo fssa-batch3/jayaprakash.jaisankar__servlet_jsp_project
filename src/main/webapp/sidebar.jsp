@@ -103,12 +103,13 @@
       </ul>
     </li>
     <li>
-      <form id="logoutbtn">
-        <button class="logoutbtn" type="submit">
-          <i class="bx bx-log-out"></i>
-          <span class="link_name">LogOut</span>
-        </button>
-      </form>
+<form id="logoutbtn" action="/logout" method="post">
+    <button class="logoutbtn" type="submit">
+        <i class="bx bx-log-out"></i>
+        <span class="link_name">LogOut</span>
+    </button>
+</form>
+
       <ul class="sub-menu blank">
         <li><a class="link_name" href="#">LogOut</a></li>
       </ul>

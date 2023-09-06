@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.fssa.projectprovision.model.Milestone" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Add Milestone</title>
+    <title>Edit Milestone</title>
     <style>
-    /* Apply basic styling to the entire page */
+ /* Apply basic styling to the entire page */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -18,13 +19,13 @@ h1 {
     text-align: center;
     background-color: #333;
     color: #fff;
+    padding: 10px;
 }
 
 /* Style the form container */
 #add {
-margin-left:200px;
-    margin-top:40px;
     max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
@@ -66,26 +67,20 @@ input[type="submit"]:hover {
     
     </style>
 </head>
-<body> 
-<jsp:include page="sidebar.jsp"></jsp:include>
-    <form id="add" action="AddMilestoneServlet" method="post">
+<body>
     
-        <!-- Include task ID as a hidden field -->
-        <input  type="text" name="taskId" value="<%=request.getParameter("taskId")%>">
-        
+<jsp:include page="sidebar.jsp"></jsp:include>
+    <form id="add" action="updatemilestone" method="post">
+        <input type="hidden" name="tasks_id" value="${milestone.tasks_id }">
         <label for="taskText">Task Text:</label>
-        <input type="text" id="taskText" name="taskText" required><br>
-
+        <input type="text" id="taskText" name="taskText" value="${milestone.task_text }"><br>
         <label for="taskDate">Task Date:</label>
-        <input type="date" id="taskDate" name="taskDate" required><br>
-
+        <input type="date" id="taskDate" name="taskDate" value="${milestone.task_date }"><br>
         <label for="taskTime">Task Time:</label>
-        <input type="time" id="taskTime" name="taskTime" required><br>
-
-        <label for="isReminder">Is Reminder:</label>
-        <input type="checkbox" id="isReminder" name="isReminder"><br>
-
-        <input type="submit" value="Add Milestone">
+        <input type="time" id="taskTime" name="taskTime" value="${milestone. task_time }"><br>
+        <label for="isRemainder">Is Reminder:</label>
+        <input type="checkbox" id="isRemainder" name="isRemainder"${milestone.is_remainder } ? "checked" : ""><br>
+        <input type="submit" value="Update Milestone">
     </form>
 </body>
 </html>
