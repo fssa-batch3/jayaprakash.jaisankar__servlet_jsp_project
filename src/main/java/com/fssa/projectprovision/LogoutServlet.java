@@ -1,23 +1,27 @@
 package com.fssa.projectprovision;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
+/**
+ * Servlet implementation class LogoutServlet
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Invalidate the user's session to log them out
-        HttpSession session = request.getSession(false); // Get the current session, or create one if it doesn't exist
-        if (session != null) {
-            session.invalidate(); // Invalidate the session (log out)
-        }
-        
-        // Redirect the user to the index.jsp page after logging out
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.invalidate(); // Invalidate the session
+        request.setAttribute("errorMessage", "Logged Out Successfully");
+		request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
+
 }

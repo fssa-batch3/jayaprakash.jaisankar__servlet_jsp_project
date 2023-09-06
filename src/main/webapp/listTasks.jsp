@@ -72,7 +72,7 @@ a {
   <!-- Add Task Link -->
                 <a href=" addmilestone.jsp?taskId=<%= task.getId() %>">Add</a>
 
-
+<a href=" viewmilestone.jsp?taskId=<%= task.getId() %>">View</a>
                     <!-- Edit Task Link -->
                     <a href="editTask?id=<%= task.getId() %>">Edit</a>
                     <!-- Delete Task Link -->
