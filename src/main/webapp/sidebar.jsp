@@ -96,10 +96,10 @@
     <li>
       <a href="#">
         <i class="bx bx-moon"></i>
-        <span class="link_name">Dark Mode</span>
+        <span id="link" class="link_name">Dark Mode</span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="#">Dark Mode</a></li>
+        <li><a id="link" class="link_name" >Dark Mode</a></li>
       </ul>
     </li>
     <li>
@@ -128,6 +128,15 @@
     </li>
   </ul>
 </div>
+<script>
+const darkModeToggle =   document.getElementById("link");
+const body = document.body;
 
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+});
+
+
+</script>
 </body>
 </html>

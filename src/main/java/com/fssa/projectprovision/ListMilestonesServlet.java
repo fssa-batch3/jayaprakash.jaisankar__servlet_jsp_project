@@ -1,6 +1,7 @@
 package com.fssa.projectprovision;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,8 @@ public class ListMilestonesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Call the method to retrieve project tasks with milestones from the database
+		
+		
 		List<Milestone> projectTasks = MilestoneDAO.getProjectTasksWithMilestones();
 
 		// Set the list of project tasks as an attribute in the request

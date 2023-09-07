@@ -34,7 +34,7 @@ public class AddMilestoneServlet extends HttpServlet {
         LocalTime taskTime = LocalTime.parse(request.getParameter("taskTime"));
         boolean isReminder = Boolean.parseBoolean(request.getParameter("isReminder"));
 
-        Milestone milestone = new Milestone(taskId, taskId, taskText, taskDate, taskTime, isReminder);
+        Milestone milestone = new Milestone(taskId, taskText, taskDate, taskTime, isReminder);
 
         try {
             boolean created = milestoneService.insertMilestone(milestone);

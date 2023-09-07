@@ -71,15 +71,17 @@ input[type="submit"]:hover {
     
 <jsp:include page="sidebar.jsp"></jsp:include>
     <form id="add" action="updatemilestone" method="post">
-        <input type="hidden" name="tasks_id" value="${milestone.tasks_id }">
+        <input  name="taskId" value="${milestone.id }">
         <label for="taskText">Task Text:</label>
-        <input type="text" id="taskText" name="taskText" value="${milestone.task_text }"><br>
+         <input type="text" id="taskText" name="taskText" value="${milestone.taskText}">
+        <br>
         <label for="taskDate">Task Date:</label>
-        <input type="date" id="taskDate" name="taskDate" value="${milestone.task_date }"><br>
+        <input type="date" id="taskDate" name="taskDate" value="${milestone.taskDate }"><br>
         <label for="taskTime">Task Time:</label>
-        <input type="time" id="taskTime" name="taskTime" value="${milestone. task_time }"><br>
+        <input type="time" id="taskTime" name="taskTime" value="${milestone. taskTime }"><br>
         <label for="isRemainder">Is Reminder:</label>
-        <input type="checkbox" id="isRemainder" name="isRemainder"${milestone.is_remainder } ? "checked" : ""><br>
+        <input type="checkbox" id="isReminder" name="isReminder" ${milestone.isRemainder ? 'checked' : ''}><br>
+
         <input type="submit" value="Update Milestone">
     </form>
 </body>
