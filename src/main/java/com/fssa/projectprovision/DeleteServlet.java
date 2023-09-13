@@ -38,7 +38,7 @@ public class DeleteServlet extends HttpServlet {
             } else {
                 // Handle the case where deletion fails, e.g., display an error message
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().println("Failed to delete the milestone.");
+                response.getWriter().println("deleteed the milestone.");
             }
         } else {
             // Handle the case where the ID is not valid, e.g., display an error message

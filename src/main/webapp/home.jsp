@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProjectProVision</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
@@ -26,11 +26,10 @@
       </div>
 
       <div class="search-add-task">
-      <a href="taskadd.jsp">
+     
         <button class="addtask" id="addtask" type="button">
           <i class="bx bx-plus"></i>&nbsp;Add project task
         </button>
-        </a>
         <i class="bx bx-search"></i
         ><input
           class="form-control mr-sm-2"
@@ -151,7 +150,7 @@
               <br />
               <div class="form-floating mb-3" id="firstinput">
                 <input
-                  type="datetime-local"
+                  
                   class="form-control taskdue"
                   id="taskdue"
                   id="floatingInput"
@@ -263,31 +262,21 @@
 
     </section>
 <script>
-    // Function to load tasks based on filter, sort, and search
-    function loadTasks() {
-        const sortCriteria = document.getElementById("sort").value;
-        const filterCriteria = document.getElementById("filter").value;
-        const searchKeyword = document.getElementById("searchbarfilter").value;
+//add task div open
+let addtask = document.getElementById("addtask");
+addtask.addEventListener("click", (event) => {
+  event.preventDefault();
 
-        // Make an AJAX request to the servlet with the filter, sort, and search parameters
-        fetch(`/listTasks?sort=${sortCriteria}&filter=${filterCriteria}&search=${searchKeyword}`)
-            .then(response => response.json())
-            .then(data => {
-                // Update the todo-container with the retrieved tasks
-                document.getElementById("todo-container").innerHTML = data;
-            })
-            .catch(error => {
-                console.error("Error loading tasks: ", error);
-            });
-    }
+  document.getElementById("popupOverlay").style.display = "block";
+});
 
-    // Attach event listeners to filter, sort, and search elements
-    document.getElementById("sort").addEventListener("change", loadTasks);
-    document.getElementById("filter").addEventListener("change", loadTasks);
-    document.getElementById("searchbarfilter").addEventListener("input", loadTasks);
+//cancel task
+let closetask = document.getElementById("closePopup");
+closetask.addEventListener("click", (event) => {
+  event.preventDefault();
 
-    // Initial load of tasks
-    loadTasks();
+  document.getElementById("popupOverlay").style.display = "none";
+});
 </script>
     
 
