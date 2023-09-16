@@ -1,6 +1,7 @@
 package com.fssa.projectprovision;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,16 +27,11 @@ public class ListTasksServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException,                                               IOException {
+            throws ServletException,IOException {
         try {
-            // Retrieve the list of tasks from the database using the TaskService or TaskDAO
-            List<Task> taskList = taskService.getAllTasks(); // Replace with the appropriate method
-
-            // Set the list of tasks as an attribute in the request
-            request.setAttribute("taskList", taskList);
-
-            // Forward the request to the JSP page for rendering
-            request.getRequestDispatcher("/listTasks.jsp").forward(request, response);
+            List<Task> taskList = taskService.getAllTasks(); 
+          request.setAttribute("taskList", taskList);
+  request.getRequestDispatcher(  "pages/listTasks.jsp").forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

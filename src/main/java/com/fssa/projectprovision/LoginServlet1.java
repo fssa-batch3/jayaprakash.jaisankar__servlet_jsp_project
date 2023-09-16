@@ -32,11 +32,13 @@ public class LoginServlet1 extends HttpServlet {
             if (loggedInUser != null) {
                 // Store the user's ID in the session
                 HttpSession session = request.getSession();
-                session.setAttribute("userId", loggedInUser.getId());
+                session.setAttribute("userId", loggedInUser.getUserId());
+             // Print a message to the console to confirm that the attribute was set
+             System.out.println("User ID set in session: " + loggedInUser.getUserId());
 
-                response.sendRedirect(request.getContextPath() + "/home.jsp");
+                response.sendRedirect(request.getContextPath() + "/index2.jsp");
             } else {
-                response.sendRedirect(request.getContextPath() + "/login.jsp");
+                response.sendRedirect(request.getContextPath() + "/login3.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();

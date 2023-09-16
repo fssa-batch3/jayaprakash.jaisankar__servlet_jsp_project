@@ -2,6 +2,7 @@ package com.fssa.projectprovision;
 
 import java.io.IOException;
 
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class ProjectTasksWithMilestonesServlet extends HttpServlet {
 		request.setAttribute("projectTasks", projectTasks);
 
 		// Forward the request to a JSP page for rendering
-		request.getRequestDispatcher("/projectTasksWithMilestones.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/projectTasksWithMilestones.jsp").forward(request, response);
     }
 
     private void handleError(String message, HttpServletResponse response) throws IOException {

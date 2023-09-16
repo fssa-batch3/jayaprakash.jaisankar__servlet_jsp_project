@@ -52,7 +52,7 @@ public class EditTaskServlet extends HttpServlet {
                 request.setAttribute("task", task);
 
                 // Forward the request to the JSP page for editing
-                request.getRequestDispatcher("/editTask.jsp").forward(request, response);
+                request.getRequestDispatcher("/pages/tododetails.jsp").forward(request, response);
             } else {
                 response.getWriter().write("Task not found.");
             }

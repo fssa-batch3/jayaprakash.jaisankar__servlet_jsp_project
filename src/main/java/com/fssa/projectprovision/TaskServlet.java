@@ -1,6 +1,7 @@
 package com.fssa.projectprovision;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -47,7 +48,8 @@ public class TaskServlet extends HttpServlet {
             String projectName = request.getParameter("projectname");
             String taskPriority = request.getParameter("taskpriority");
             String taskTags = request.getParameter("tasktags");
-            String todoId = request.getParameter("todoId");
+            String todoId = RandomStringGenerator.generateRandomString(32);
+
 
 //            // Convert String to LocalDate
 //            LocalDate taskDue = LocalDate.parse(taskDueStr); // Assuming it's in YYYY-MM-DDTHH:mm format

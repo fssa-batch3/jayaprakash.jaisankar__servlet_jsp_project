@@ -34,9 +34,15 @@ public class RegistrationServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String mobileNumber = request.getParameter("mobile_number");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        System.out.println("Date of Birth Parameter: " + request.getParameter("date_of_birth"));
-        LocalDate dateOfBirth = LocalDate.parse(request.getParameter("date_of_birth"), formatter);
-        String defaultAddress = "No Address";
+        System.out.println("Date of Birth Parameter: " + request.getParameter("dateOfBirth"));
+        String dateOfBirthParam = request.getParameter("dateofbirth");
+        if (dateOfBirthParam == null || dateOfBirthParam.isEmpty()) {
+            response.getWriter().write("Date of birth parameter is missing or empty.");
+            return;
+        }
+
+        LocalDate dateOfBirth = LocalDate.parse(dateOfBirthParam, formatter);
+   String defaultAddress = "No Address";
         String defaultAboutMe = "No information available.";
 
         String email = request.getParameter("email"); 
@@ -83,5 +89,3 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 }
-
-

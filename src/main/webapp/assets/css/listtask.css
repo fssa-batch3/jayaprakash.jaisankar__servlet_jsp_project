@@ -1,0 +1,88 @@
+@charset "ISO-8859-1";
+        /* Reset some default styles */
+        body, p, a {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Define styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+                background: #e4e9f7;
+        }
+
+        /* Page container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Task item container */
+        .task-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        /* Task status */
+        .task-status {
+            font-size: 18px;
+            font-weight: bold;
+                       text-decoration: none;
+            color: #007bff; /* Blue color */
+            margin-bottom: 10px;
+        }
+        
+                .task-status {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff; /* Blue color */
+            margin-bottom: 10px;
+        }
+            .task-status1 {
+            font-size: 18px;
+            font-weight: bold;
+            color: red; /* Blue color */
+            margin-bottom: 10px;
+        }
+        
+
+        /* Task name */
+        .task-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Project name */
+        .project-name {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Task due date */
+        .task-due {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Task assignee */
+        .task-assignee {
+            font-size: 16px;
+            color: #007bff; /* Blue color */
+            text-decoration: none;
+        }
+
+        /* Task priority */
+        .task-priority {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff5733; /* Red color */
+            margin-top: 10px;
+        }
+  
