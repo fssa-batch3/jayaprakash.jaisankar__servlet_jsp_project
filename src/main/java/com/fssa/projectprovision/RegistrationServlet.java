@@ -79,6 +79,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             boolean userCreated = UserDAO.createUser(newUser);
             if (userCreated) {
+            	request.setAttribute("profilePicURL", defaultProfilePic);
                 response.sendRedirect(request.getContextPath() + "/signin.jsp");
             } else {
                 response.getWriter().write("User registration failed.");

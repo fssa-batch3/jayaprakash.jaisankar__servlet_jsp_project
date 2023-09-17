@@ -23,15 +23,19 @@
     <script src="https://apis.google.com/js/api.js"></script>
   </head>
   <body>
-    <div class="sidebar close">
+<div class="sidebar close">
       <div class="logo-details">
-        <i class="bx bx-task"></i>
+      
+<a href="<%=request.getContextPath()%>/index2.jsp">
+        <i class="bx bx-task"></i></a>
         <span class="logo_name">ProjectProVision</span>
+        
+      
       </div>
       <ul class="nav-links">
         <li></li>
         <li>
-          <a href="pages/mytodo.jsp">
+          <a href="<%=request.getContextPath()%>/pages/mytodo.jsp">
             <i class="bx bx-task"></i>
             <span class="link_name">My project's</span>
           </a>
@@ -59,7 +63,7 @@
           </div>
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Category</a></li>
-            <li><a href="./pages/PersonalTasks.jsp">Personal Tasks</a></li>
+            <li><a href="<%=request.getContextPath()%>/pages/PersonalTasks.jsp">Personal Tasks</a></li>
             <li><a href="#">Work/Professional Tasks</a></li>
             <li><a href="#">Academic Tasks</a></li>
           </ul>
@@ -74,7 +78,7 @@
           </div>
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Templates</a></li>
-            <li><a href="pages/freetemplates.jsp">Free Templates</a></li>
+            <li><a href="<%=request.getContextPath()%>/pages/freetemplates.jsp">Free Templates</a></li>
             <li><a href="#">Paid Templates</a></li>
           </ul>
         </li>
@@ -131,6 +135,7 @@
         </li>
       </ul>
     </div>
+
     <section class="home-section">
       <div class="home-content">
         <i class="bx bx-menu"></i>

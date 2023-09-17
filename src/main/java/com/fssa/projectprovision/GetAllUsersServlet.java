@@ -1,6 +1,7 @@
 package com.fssa.projectprovision;
 
 import java.io.IOException;
+
 import com.google.gson.Gson;
 
 
@@ -26,20 +27,15 @@ public class GetAllUsersServlet extends HttpServlet {
         List<User> userList = null;
         try {
             userList = userService.getAllUsers();
+            request.setAttribute("userList", userList);
+            request.getRequestDispatcher("pages/userList.jsp").forward(request, response);
+  
         } catch (ServiceException e) {
             e.printStackTrace();
         }
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        Gson gson = new Gson();
-        
-        String userListJson = gson.toJson(userList);
-        
-        response.getWriter().write(userListJson);
+       
     }
-
 
 }
 

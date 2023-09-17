@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.service.TaskService;
@@ -33,7 +35,6 @@ public class TaskServlet extends HttpServlet {
             String taskName = request.getParameter("taskname");
             String taskDetails = request.getParameter("taskdetails");
             String taskCategory = request.getParameter("taskcategory");
-//            String taskDueStr = request.getParameter("taskdue");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String taskDueStrInput = request.getParameter("taskdue");
             if (taskDueStrInput == null) {
@@ -42,6 +43,9 @@ public class TaskServlet extends HttpServlet {
             }
             LocalDate taskDueDate = LocalDate.parse(taskDueStrInput, formatter);
 
+         // Retrieve the logged-in user's ID from the session as a Long
+            HttpSession session = request.getSession();
+            Long userId = (Long) session.getAttribute("userId");
 
             String taskAssignee = request.getParameter("taskassignee");
             String taskStatus = request.getParameter("taskstatus");
@@ -49,10 +53,6 @@ public class TaskServlet extends HttpServlet {
             String taskPriority = request.getParameter("taskpriority");
             String taskTags = request.getParameter("tasktags");
             String todoId = RandomStringGenerator.generateRandomString(32);
-
-
-//            // Convert String to LocalDate
-//            LocalDate taskDue = LocalDate.parse(taskDueStr); // Assuming it's in YYYY-MM-DDTHH:mm format
 
             // Create a Task object with the retrieved data
             Task task = new Task();
@@ -67,26 +67,29 @@ public class TaskServlet extends HttpServlet {
             task.setTaskTags(taskTags);
             task.setTodoId(todoId);
 
-            // Use TaskService to create the task
-            boolean created = taskService.createTask(task);
+            // Set the creator ID to the logged-in user's ID
+            task.setCreatorId(userId);
 
+            // Use TaskService to create the task
+
+boolean created = taskService.createTask(task, userId);
             if (created) {
                 response.setStatus(HttpServletResponse.SC_CREATED);
                 response.getWriter().write("Task created successfully");
-                
+
                 // Redirect to the /listTasks servlet
                 response.sendRedirect(request.getContextPath() + "/listTasks");
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Failed to create task");
             }
-            
+
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Failed to create task: " + e.getMessage());
         }
     }
-    
+
     
 }

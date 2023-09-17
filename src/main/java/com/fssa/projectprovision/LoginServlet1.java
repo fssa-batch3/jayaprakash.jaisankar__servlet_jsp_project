@@ -1,6 +1,5 @@
 package com.fssa.projectprovision;
 
-
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.User;
 import com.fssa.projectprovision.service.UserService;
@@ -33,8 +32,10 @@ public class LoginServlet1 extends HttpServlet {
                 // Store the user's ID in the session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", loggedInUser.getUserId());
-             // Print a message to the console to confirm that the attribute was set
-             System.out.println("User ID set in session: " + loggedInUser.getUserId());
+                session.setAttribute("taskassignee", loggedInUser.getTaskAssignee()); // Set task assignee
+
+                System.out.println("User ID set in session: " + loggedInUser.getUserId());
+                System.out.println("Task Assignee set in session: " + loggedInUser.getTaskAssignee());
 
                 response.sendRedirect(request.getContextPath() + "/index2.jsp");
             } else {
@@ -44,10 +45,5 @@ public class LoginServlet1 extends HttpServlet {
             e.printStackTrace();
             response.getWriter().write("An error occurred");
         }
-        
-        
-       
-
-        
     }
 }

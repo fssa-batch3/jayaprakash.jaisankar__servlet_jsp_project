@@ -1,6 +1,7 @@
 package com.fssa.projectprovision;
 
 import com.fssa.projectprovision.exception.ServiceException;
+
 import com.fssa.projectprovision.model.User;
 import com.fssa.projectprovision.service.UserService;
 
@@ -12,74 +13,98 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/ProfileServlet")
 public class ProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute("userId");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false); // Get the existing session, don't create a new one if it doesn't exist
 
-        if (userId == null) {
-            response.sendRedirect(request.getContextPath() + "/pages/login3.jsp");
-            return;
-        }
+        if (session != null && session.getAttribute("userId") != null) {
+            // User is logged in, retrieve user information from the session
+            long userId = (long) session.getAttribute("userId");
 
-        UserService userService = new UserService();
+            try {
+                // Create an instance of UserService
+                UserService userService = new UserService();
+                
+                // Retrieve user information from the database using the userId
+                User user = userService.getUserById(userId);
 
-        try {
-            User user = userService.getUserById(userId);
-
-            if (user != null) {
-                request.setAttribute("user", user);
-                request.getRequestDispatcher("/profile.jsp").forward(request, response);
-            } else {
-                response.getWriter().write("User not found");
+                if (user != null) {
+                    // Forward to the profile page with user information
+                    request.setAttribute("user", user);
+                    request.getRequestDispatcher("/pages/Profile.jsp").forward(request, response);
+                } else {
+                    // Handle the case where the user is not found in the database
+                    response.getWriter().write("User not found");
+                }
+            } catch (ServiceException e) {
+                e.printStackTrace();
+                response.getWriter().write("An error occurred");
             }
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            response.getWriter().write("An error occurred");
-        } catch (ServletException e) {
-            e.printStackTrace();
-            response.getWriter().write("Servlet error occurred");
+        } else {
+            // User is not logged in, redirect to the login page or display an error message
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
         }
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false); // Get the existing session, don't create a new one if it doesn't exist
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute("userId");
+        if (session != null && session.getAttribute("userId") != null) {
+            // User is logged in, retrieve user information from the session
+            long userId = (long) session.getAttribute("userId");
 
-        if (userId == null) {
-            response.sendRedirect(request.getContextPath() + "/login3.jsp");
-            return;
-        }
-
-        UserService userService = new UserService();
-
-        try {
-            User user = userService.getUserById(userId);
-
-            if (user != null) {
+            try {
+                // Retrieve updated user information from the form parameters
                 String name = request.getParameter("name");
+                String gender = request.getParameter("gender");
                 String mobileNumber = request.getParameter("mobileNumber");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                System.out.println("Date of Birth Parameter: " + request.getParameter("dateOfBirth"));
+                String dateOfBirthParam = request.getParameter("dateOfBirth");
+
+                if (dateOfBirthParam == null || dateOfBirthParam.isEmpty()) {
+                    response.getWriter().write("Date of birth parameter is missing or empty.");
+                    return;
+                }
+
+                LocalDate dateOfBirth = LocalDate.parse(dateOfBirthParam, formatter);
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                String profilePic = request.getParameter("profilePic");
                 String address = request.getParameter("address");
                 String aboutMe = request.getParameter("aboutMe");
 
+                // Create a User object with the updated information
+                User user = new User();
+                user.setUserId(userId);
                 user.setName(name);
+                user.setGender(gender);
                 user.setMobileNumber(mobileNumber);
+                user.setDateOfBirth(dateOfBirth);
+                user.setEmail(email);
+                user.setPassword(password);
+                user.setProfilePic(profilePic);
                 user.setAddress(address);
                 user.setAboutMe(aboutMe);
 
+                // Update the user's information in the database
+                UserService userService = new UserService();
                 userService.updateUser(user);
-
-                response.sendRedirect(request.getContextPath() + "/ProfileServlet");
-            } else {
-                response.getWriter().write("User not found");
+                request.setAttribute("profilePicURL", profilePic);
+                // Redirect to a success page or display a success message
+                response.sendRedirect(request.getContextPath() + "/index2.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.getWriter().write("An error occurred");
             }
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            response.getWriter().write("An error occurred");
+        } else {
+            // User is not logged in, redirect to the login page or display an error message
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
         }
     }
 }
