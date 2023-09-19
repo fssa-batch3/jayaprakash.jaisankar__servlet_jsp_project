@@ -19,7 +19,7 @@
 <%
     HttpSession ses = request.getSession();
     Long userId = (Long) ses.getAttribute("userId");
-    String taskAssignee = (String) ses.getAttribute("taskassignee"); // Retrieve taskassignee
+    String taskAssignee = (String) ses.getAttribute("taskassignee"); 
 %>
 
 <div class="container">

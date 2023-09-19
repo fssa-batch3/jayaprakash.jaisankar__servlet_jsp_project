@@ -21,6 +21,29 @@
     />
     <!-- End -->
     <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+    
+    form {
+    display: flex;
+    align-items: center;
+}
+
+i.bx-search {
+    margin-right: -2px;
+    padding-top:0px;
+}
+
+input.form-control.mr-sm-2 {
+    flex: 1;
+    margin-right: 10px;
+}
+
+button[type="submit"] {
+    margin-right: 10px;
+}
+    
+    
+    </style>
   </head>
   <body>
 <div class="sidebar close">
@@ -64,7 +87,7 @@
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Category</a></li>
             <li><a href="<%=request.getContextPath()%>/pages/PersonalTasks.jsp">Personal Tasks</a></li>
-            <li><a href="#">Work/Professional Tasks</a></li>
+            <li><a href="#">Professional Tasks</a></li>
             <li><a href="#">Academic Tasks</a></li>
           </ul>
         </li>

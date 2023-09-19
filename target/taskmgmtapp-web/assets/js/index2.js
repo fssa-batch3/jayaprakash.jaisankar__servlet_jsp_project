@@ -13,42 +13,6 @@ sidebarBtn.addEventListener("click", () => {
   sidebar.classList.toggle("close");
 });
 
-document.getElementById("taskForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get the form data
-    const formData = new FormData(this);
-
-    // Prepare the template parameters using form data
-    const templateParams = {
-        taskname: formData.get("taskname"),
-        taskdetails: formData.get("taskdetails"),
-        taskcategory: formData.get("taskcategory"),
-        taskdue: formData.get("taskdue"),
-        taskassignee: formData.get("taskassignee"),
-        taskstatus: formData.get("taskstatus"),
-        projectname: formData.get("projectname"),
-        taskpriority: formData.get("taskpriority"),
-        tasktags: formData.get("tasktags"),
-        // Add more fields as needed
-    };
-
-    // Send the email using email.js (no need to specify user ID)
-    emailjs.send("service_1pzxrcb", "template_kixexnk", templateParams)
-        .then(function (response) {
-            console.log("Email sent successfully", response);
-            // Show a success alert to the user
-            alert("Email sent successfully");
-            
-            // Optionally, you can redirect the user to a thank you page.
-            // window.location.href = "thankyou.html";
-        })
-        .catch(function (error) {
-            console.error("Email sending failed", error);
-            // Show an error alert to the user
-            alert("Email sending failed. Please try again later.");
-        });
-});
 
 
 

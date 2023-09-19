@@ -90,7 +90,7 @@
             <span class="link_name">Recurring Project's</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Recurring Project's</a></li>
+            <li><a class="link_name" href="<%= request.getContextPath() %>/calendar">Recurring Project's</a></li>
           </ul>
         </li>
         <li>

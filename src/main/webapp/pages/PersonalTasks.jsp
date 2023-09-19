@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.fssa.projectprovision.model.PersonalTask" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
 
 <html lang="en">
   <head>
@@ -147,149 +149,48 @@
       <h2>Personal Task Management</h2>
 
       <div class="search-add-task">
-        <button class="addtask" id="addtask" type="button">
-          <i class="bx bx-plus"></i>&nbsp;Add your task
-        </button>
+       <button class="addtask" id="addtask" type="button" onclick="toggleTaskForm()">
+  <i class="bx bx-plus"></i>&nbsp;Add your task
+</button>
+
       </div>
+      
+      
 
-      <form id="person">
-        <div class="full">
-          <div class="todo">
-            <input type="text" id="task" placeholder="Enter a task" />
-          </div>
-          <div class="todo">
-            <input type="checkbox" id="remain" /><span>Remainder</span>
-          </div>
-          <div class="todo">
-            <label for="date">Select date:</label>
-            <select id="date"></select>
-          </div>
-          <div class="todo">
-            <label for="time">Select time:</label>
-            <select id="time"></select>
-          </div>
-          <div class="todo"><button id="add-task">Add Task</button></div>
+      <form id="task-form	" action="<%= request.getContextPath() %>/personal" method="post">
+    <div class="full">
+        <div class="todo">
+            <input type="text" id="task" name="taskName" placeholder="Enter a task" />
         </div>
-      </form>
-
+        <div class="todo">
+            <input type="checkbox" id="remain" name="remainder" /><span>Remainder</span>
+        </div>
+        <div class="todo">
+            <label for="date">Select date:</label>
+            <input type="date" id="date" name="taskDate" />
+        </div>
+        <div class="todo">
+            <label for="time">Select time:</label>
+            <input type="time" id="time" name="taskTime" />
+        </div>
+        <div class="todo"><button type="submit">Add Task</button></div>
+    </div>
+</form>
+ 
       <div class="show2">
         <div id="task-list"></div>
       </div>
     </div>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const show = document.querySelector(".search-add-task");
-        const hide = document.getElementById("person");
-
-        show.addEventListener("click", function () {
-          hide.style.display = "block";
-        });
-
-        const taskInput = document.getElementById("task");
-        const addTaskButton = document.getElementById("add-task");
-        const dateSelect = document.getElementById("date");
-        const timeSelect = document.getElementById("time");
-        const taskList = document.getElementById("task-list");
-
-        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-        // Dynamically populate date dropdown
-        const now = new Date();
-        for (let i = 0; i < 7; i++) {
-          const date = new Date(now);
-          date.setDate(now.getDate() + i);
-          const formattedDate = date.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-          dateSelect.innerHTML += `<option value="${formattedDate}">${formattedDate}</option>`;
-        }
-
-        // Dynamically populate time dropdown
-        const timeOptions = generateTimeOptions();
-        timeOptions.forEach((time) => {
-          timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
-        });
-
-        function generateTimeOptions() {
-          const options = [];
-          for (let hour = 0; hour < 24; hour++) {
-            for (let minute = 0; minute < 60; minute += 15) {
-              const formattedHour = hour.toString().padStart(2, "0");
-              const formattedMinute = minute.toString().padStart(2, "0");
-              options.push(`${formattedHour}:${formattedMinute}`);
-            }
-          }
-          return options;
-        }
-
-        function displayTasks() {
-          taskList.innerHTML = "";
-          tasks.forEach(function (task, index) {
-            const li = document.createElement("div");
-            li.innerHTML = `
-        <div class="dis">
-          <span>${task.text}</span>
-          <span>Date: ${task.date}</span>
-          <span>Time: ${task.time}</span>
-          <span>Remainder: ${task.remainder ? "Yes" : "No"}</span>
-          <div class="btn">
-            <button class="edit-task" data-index="${index}">Edit</button>
-            <button class="delete-task" data-index="${index}">Delete</button>
-          </div>
-        </div>
-      `;
-            taskList.appendChild(li);
-          });
-        }
-
-        addTaskButton.addEventListener("click", function () {
-          const taskText = taskInput.value.trim();
-          const selectedDate = dateSelect.value;
-          const selectedTime = timeSelect.value;
-          const remainderCheckbox = document.getElementById("remain");
-          const remainderValue = remainderCheckbox.checked;
-
-          if (taskText !== "") {
-            tasks.push({
-              text: taskText,
-              date: selectedDate,
-              time: selectedTime,
-              remainder: remainderValue,
-            });
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            taskInput.value = "";
-            remainderCheckbox.checked = false;
-            displayTasks();
-          }
-        });
-
-        taskList.addEventListener("click", function (event) {
-          const target = event.target;
-          if (target.classList.contains("delete-task")) {
-            const index = target.getAttribute("data-index");
-            tasks.splice(index, 1);
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            displayTasks();
-          } else if (target.classList.contains("edit-task")) {
-            const index = target.getAttribute("data-index");
-            const task = tasks[index];
-
-            const editedTaskText = prompt("Edit the task text:", task.text);
-            if (editedTaskText !== null) {
-              task.text = editedTaskText;
-              task.date = prompt("Edit the date:", task.date);
-              task.time = prompt("Edit the time:", task.time);
-              task.remainder = confirm("Set as remainder?");
-              localStorage.setItem("tasks", JSON.stringify(tasks));
-              displayTasks();
-            }
-          }
-        });
-
-        displayTasks();
-      });
-    </script>
+  function toggleTaskForm() {
+    var taskForm = document.getElementById("task-form");
+    if (taskForm.style.display === "none" || taskForm.style.display === "") {
+      taskForm.style.display = "block"; // Show the form
+    } else {
+      taskForm.style.display = "none"; // Hide the form
+    }
+  }
+</script>
+    
   </body>
 </html>

@@ -80,6 +80,7 @@
          <div class="form-group">
                 <input type="submit" value="Register">
             </div>
+             <span class="task-status1"> <a href="deleteUserServlet?id=${user.getId()}">Delete</a></span>
         </form>
     </div>
 </body>
