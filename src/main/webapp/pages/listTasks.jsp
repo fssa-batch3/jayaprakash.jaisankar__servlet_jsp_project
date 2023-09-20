@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.fssa.projectprovision.model.Task" %>
+<%@ page import="com.fssa.projectprovision.model.Milestone" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 
 <html lang="en">
@@ -43,9 +44,10 @@
         %>
          <span class="task-status">Project Status <a href="editTask?id=<%= task.getId() %>">View Details</a></span>
         <span class="task-status1"> <a href="deleteTask?id=<%= task.getId() %>">Delete</a></span>
+     <span class="task-status3"> <a href="<%=request.getContextPath()%>/projectTasksWithMilestones?taskId=<%= task.getId() %>">View</a></span>
     
-        <a href="<%= request.getContextPath() %>/pages/updateTask?id=<%= task.getId() %>">Update</a>
-        <%
+      <a href="<%= request.getContextPath() %>/pages/addmilestone.jsp?taskId=<%= task.getId() %>&taskassignee=<%= task.getTaskAssignee() %>">Add</a>
+    <%
             }
         %>
         <p class="task-name">Project Name:<%= task.getTaskName() %></p>

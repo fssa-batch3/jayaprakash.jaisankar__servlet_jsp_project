@@ -41,9 +41,11 @@ public class EditMilestoneServlet extends HttpServlet {
 		    request.setAttribute("milestone", milestone);
 
 		    // Forward the request to the JSP page for editing
-		    request.getRequestDispatcher("/editmilestone.jsp").forward(request, response);
+		    request.getRequestDispatcher("/pages/editmilestone.jsp").forward(request, response);
 		} else {
 		    response.getWriter().write("Milestone not found.");
+
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
 		}
     }
 }

@@ -23,7 +23,7 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <style>
     
-    form {
+    #search {
     display: flex;
     align-items: center;
 }
@@ -107,12 +107,12 @@ button[type="submit"] {
         </li>
         <li></li>
         <li>
-          <a href="#">
+          <a href="<%= request.getContextPath() %>/calendar">
             <i class="bx bx-refresh"></i>
             <span class="link_name">Recurring Project's</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Recurring Project's</a></li>
+            <li><a class="link_name" href="<%= request.getContextPath() %>/calendar">Recurring Project's</a></li>
           </ul>
         </li>
         <li>
@@ -145,6 +145,14 @@ button[type="submit"] {
           </ul>
         </li>
         <li>
+        
+        
+          <form action="<%= request.getContextPath() %>/listTasks" method="get" id="logoutbtn">
+            <button class="logoutbtn" type="submit">
+              <span class="link_name">Dashboard</span>
+            </button>
+          </form>
+          
           <div class="profile-details">
             <a class="profile-content" href="<%=request.getContextPath()%>/ProfileServlet">
               <img id="profile_pic" src="" alt="profileImg" />
@@ -170,7 +178,7 @@ button[type="submit"] {
           <i class="bx bx-plus"></i>&nbsp;Add project task
         </button>
         
-       <form action="<%= request.getContextPath() %>/searchtask" method="GET">
+       <form id="search" action="<%= request.getContextPath() %>/searchtask" method="GET">
         <i class="bx bx-search"></i
         >
     <input
@@ -269,10 +277,9 @@ button[type="submit"] {
             <br />
             <select class="form-select" aria-label="Default select example" name="taskcategory" required>
                 <option disabled selected value="">Project Category</option>
-                <option value="Personal Tasks">Personal Project</option>
-                <option value="Work/Professional Tasks">Work/Professional</option>
+         
+                <option value="Professional">Professional</option>
                 <option value="Academic Tasks">Academic</option>
-                <option value="Health and Fitness Tasks">Health and Fitness Tasks</option>
                 <option value="Social/Event Tasks">Social</option>
             </select>
             <br />
@@ -288,7 +295,7 @@ button[type="submit"] {
                 <option disabled selected value="">Project Status</option>
                 <option value="Completed">Completed</option>
                 <option value="Currently Working">Currently Working</option>
-                <option value="Not Completed (Incomplete)">Not Completed (Incomplete)</option>
+                <option value="Not Completed (Incomplete)">Not Completed</option>
                 <option value="Not Yet Started">Not Yet Started</option>
             </select>
             <br />
@@ -324,6 +331,23 @@ button[type="submit"] {
       crossorigin="anonymous"
     ></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
-    <script src="<%=request.getContextPath()%>/assets/js/index2.js"></script>
-  </body>
+    <script>
+ // add task div open
+    let addtask = document.getElementById("addtask");
+    addtask.addEventListener("click", (event) => {
+      event.preventDefault();
+      document.getElementById("popupOverlay").style.display = "block";
+    });
+
+    // cancel task
+    let closetask = document.getElementById("closePopup");
+    closetask.addEventListener("click", (event) => {
+      event.preventDefault();
+      document.getElementById("popupOverlay").style.display = "none";
+    });
+
+
+    
+    </script> 
+     </body>
 </html>

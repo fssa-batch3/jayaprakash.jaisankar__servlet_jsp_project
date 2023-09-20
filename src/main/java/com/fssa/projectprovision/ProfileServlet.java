@@ -45,6 +45,8 @@ public class ProfileServlet extends HttpServlet {
             } catch (ServiceException e) {
                 e.printStackTrace();
                 response.getWriter().write("An error occurred");
+
+                response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
             }
         } else {
             // User is not logged in, redirect to the login page or display an error message

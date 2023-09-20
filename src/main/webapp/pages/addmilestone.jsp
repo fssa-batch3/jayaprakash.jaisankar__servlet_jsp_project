@@ -78,6 +78,8 @@ input[type="submit"]:hover {
         <label for="taskDate">Task Date:</label>
         <input type="date" id="taskDate" name="taskDate" required><br>
 
+   <label for="taskDate">Task Assignee:</label>
+        <input type="text" id="taskassignee" value="<%=request.getParameter("taskassignee")%>" name="taskassignee" required><br>
         <label for="taskTime">Task Time:</label>
         <input type="time" id="taskTime" name="taskTime" required><br>
 

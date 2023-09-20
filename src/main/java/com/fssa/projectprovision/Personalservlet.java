@@ -70,7 +70,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         }
     } catch (Exception e) {
         e.printStackTrace();
-        response.sendRedirect(request.getContextPath() + "/error.jsp");
+        response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
     }
 }
 }

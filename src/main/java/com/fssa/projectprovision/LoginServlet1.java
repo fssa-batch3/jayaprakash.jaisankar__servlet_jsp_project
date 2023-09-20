@@ -44,6 +44,8 @@ public class LoginServlet1 extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().write("An error occurred");
+
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
     }
 }

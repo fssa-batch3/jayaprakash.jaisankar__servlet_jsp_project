@@ -36,11 +36,10 @@ public class ListPersonalTasksServlet extends HttpServlet {
             request.setAttribute("personalTask", personalTask);
 
             // Forward the request to a JSP for displaying the task
-            request.getRequestDispatcher("/viewPersonalTask.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/viewPersonalTask.jsp").forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
-            // Handle the exception or redirect to an error page
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
     }
 }

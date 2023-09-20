@@ -14,22 +14,7 @@ sidebarBtn.addEventListener("click", () => {
 });
 
 
-
-
-fetch("/getAllUsers") 
-  .then((response) => response.json())
-  .then((userData) => {
-	    console.log(userData);
-
-    const findUser = userData.find((user) => user.email == todoLogin);
-    console.log(findUser);
-
-    document.getElementById("profile_pic").src = findUser["profile_pic"];
-    document.getElementById("profile_name").innerText = findUser["name"];
-  })
-  .catch((error) => {
-    console.error("Error fetching user data:", error);
-  });
+ 
 
 
 

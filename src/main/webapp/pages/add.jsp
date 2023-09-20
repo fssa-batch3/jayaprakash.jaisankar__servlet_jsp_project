@@ -11,7 +11,8 @@
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
-    <form action="<%= request.getContextPath() %>/createTask" method="post" id="taskForm">
+   
+           <form action="<%= request.getContextPath() %>/createTask" method="post" id="taskForm">
         <div id="overflow">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="taskname" name="taskname" placeholder="Task Name" required />
@@ -24,11 +25,10 @@
             <br />
             <select class="form-select" aria-label="Default select example" name="taskcategory" required>
                 <option disabled selected value="">Project Category</option>
-                <option value="Personal Tasks">Personal Project</option>
-                <option value="Work/Professional Tasks">Work/Professional</option>
+                
+                <option value="Professional Tasks">Professional</option>
                 <option value="Academic Tasks">Academic</option>
-                <option value="Health and Fitness Tasks">Health and Fitness Tasks</option>
-                <option value="Social/Event Tasks">Social</option>
+                <option value="Social">Social</option>
             </select>
             <br />
             <div class="form-floating mb-3">
@@ -43,7 +43,7 @@
                 <option disabled selected value="">Project Status</option>
                 <option value="Completed">Completed</option>
                 <option value="Currently Working">Currently Working</option>
-                <option value="Not Completed (Incomplete)">Not Completed (Incomplete)</option>
+                <option value="Not Completed (Incomplete)">Not Completed</option>
                 <option value="Not Yet Started">Not Yet Started</option>
             </select>
             <br />
@@ -60,7 +60,7 @@
             <br />
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="tasktags" name="tasktags" placeholder="Project Tags (Optional)" />
-                <label for="tasktags">Project Tags (Optional)</label>
+                <label for="tasktags">Project Tags</label>
             </div>
 
             <button type="button" id="closePopup" class="btn btn-danger">Cancel</button>

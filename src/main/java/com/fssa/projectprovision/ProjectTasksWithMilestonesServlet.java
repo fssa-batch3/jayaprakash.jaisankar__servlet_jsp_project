@@ -10,28 +10,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fssa.projectprovision.model.Milestone;
+import com.fssa.projectprovision.service.MilestoneService;
 import com.fssa.projectprovision.dao.MilestoneDAO;
 import com.fssa.projectprovision.exception.DAOException;
+import com.fssa.projectprovision.exception.ServiceException;
 
 @WebServlet("/projectTasksWithMilestones")
 public class ProjectTasksWithMilestonesServlet extends HttpServlet {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private MilestoneService milestoneService; // Create an instance variable
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        MilestoneDAO milestoneDAO = new MilestoneDAO();
+        milestoneService = new MilestoneService(milestoneDAO);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Call the method to retrieve project tasks with milestones from the database
-		List<Milestone> projectTasks = MilestoneDAO.getProjectTasksWithMilestones();
+        // Get the user ID from the session
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        System.out.println(userId);
+        String taskAssignee = (String) session.getAttribute("taskassignee"); // Retrieve taskassignee
+        System.out.println(taskAssignee);
+       
+        if (userId != null) {
+                List<Milestone> projectTasks = null;
+			try {
+				projectTasks = milestoneService.getProjectTasksWithMilestones(userId, taskAssignee);
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
 
-		// Set the list of project tasks as an attribute in the request
-		request.setAttribute("projectTasks", projectTasks);
+            request.setAttribute("projectTasks", projectTasks);
 
-		// Forward the request to a JSP page for rendering
-		request.getRequestDispatcher("/pages/projectTasksWithMilestones.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/projectTasksWithMilestones.jsp").forward(request, response);
+        } else {
+            // Redirect to the login page or handle the case when the user is not logged in
+            response.sendRedirect("pages/login3.jsp");
+        }
     }
 
     private void handleError(String message, HttpServletResponse response) throws IOException {

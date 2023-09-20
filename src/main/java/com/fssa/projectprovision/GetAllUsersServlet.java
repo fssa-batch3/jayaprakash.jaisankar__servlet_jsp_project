@@ -32,6 +32,8 @@ public class GetAllUsersServlet extends HttpServlet {
   
         } catch (ServiceException e) {
             e.printStackTrace();
+
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
 
        

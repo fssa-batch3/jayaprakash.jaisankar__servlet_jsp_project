@@ -53,6 +53,8 @@ import com.fssa.projectprovision.exception.ServiceException;
 	            e.printStackTrace();
 	            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	            response.getWriter().write("Failed to retrieve tasks: " + e.getMessage());
+
+                response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
 	        }
 	    }
 	}

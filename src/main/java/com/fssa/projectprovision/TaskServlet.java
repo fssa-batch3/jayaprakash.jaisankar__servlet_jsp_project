@@ -83,6 +83,8 @@ boolean created = taskService.createTask(task, userId);
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Failed to create task");
+
+                response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
             }
 
         } catch (ServiceException e) {

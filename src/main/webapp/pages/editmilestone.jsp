@@ -4,144 +4,85 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>List of Project Tasks with Milestones</title>
-    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style2.css" />
-    <script src="https://apis.google.com/js/api.js"></script>
- 
+    <title>Edit Milestone</title>
     <style>
-      /* Add your CSS styles here */
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #e4e9f7;
-      }
+ /* Apply basic styling to the entire page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
 
-      #task-list {
-        list-style-type: none;
-        padding-top: 30px;
-      }
+/* Style the header */
+h1 {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
 
-      .personal {
-        margin-left: 100px;
-      }
+/* Style the form container */
+#add {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
-      h1 {
-        margin-top: 10px;
-            margin-left: 100px;
-        margin-bottom: 30px;
-      }
+/* Style form labels and inputs */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
-      .dis {
-        margin-top: 20px;
-            margin-left: 100px;
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-      }
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 
-      .btn {
-        display: flex;
-        gap: 5px;
-      }
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
 
-      .edit-task,
-      .delete-task {
-        background-color: #f44336;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-      }
-
-      .edit-task {
-        background-color: #f7b731;
-      }
-
-      .delete-task:hover {
-        background-color: #c3180e;
-      }
-
-      .full {
-        width: 400px;
-        margin-top: 20px;
-        margin-left: 20px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .todo {
-        margin: 10px 0;
-        display: flex;
-        align-items: center;
-      }
-
-      .todo input[type="text"] {
-        border: none;
-        border-bottom: 2px solid #ccc;
-        padding: 5px;
-        width: 100%;
-        font-size: 16px;
-        outline: none;
-        transition: border-color 0.3s;
-      }
-
-      .todo input[type="text"]:focus {
-        border-color: #007bff;
-      }
-
-      .todo input[type="checkbox"] {
-        margin-right: 5px;
-      }
-
-      .todo span {
-        font-size: 16px;
-      }
-
-      #add-task {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      #add-task:hover {
-        background-color: #0056b3;
-      }
+/* Style the submit button on hover */
+input[type="submit"]:hover {
+    background-color: #555;
+}
+    
     </style>
 </head>
 <body>
-   
-<jsp:include page="sider.jsp" />
-    <form id="person">
-        <div class="full">
-          <div class="todo">
-            <input type="text" id="task"  name="taskId" value="${milestone.id }" />
-          </div>
-          <div class="todo">
-            <input type="checkbox" id="remain" name="taskText" value="${milestone.taskText}" /><span>Remainder</span>
-          </div>
-          <div class="todo">
-            <label for="date">Select date:</label>
-            <select id="date" name="taskDate" value="${milestone.taskDate }"></select>
-          </div>
-          <div class="todo">
-            <label for="time">Select time:</label>
-            <select id="time" name="taskTime" value="${milestone. taskTime }"></select>
-          </div>
-          <div class="todo"><button id="add-task">Add Task</button></div>
-        </div>
-      </form>
-        
-       
+    
+<jsp:include page="sider.jsp"></jsp:include>
+    <form id="add" action="<%=request.getContextPath() %>/updatemilestone" method="post">
+        <input  name="taskId" value="${milestone.id }">
+        <label for="taskText">Task Text:</label>
+         <input type="text" id="taskText" name="taskText" value="${milestone.taskText}">
+        <br>
+        <label for="taskDate">Task Date:</label>
+        <input type="date" id="taskDate" name="taskDate" value="${milestone.taskDate }"><br>
+        <label for="taskTime">Task Time:</label>
+        <input type="time" id="taskTime" name="taskTime" value="${milestone. taskTime }"><br>
+        <label for="isRemainder">Is Reminder:</label>
+        <input type="checkbox" id="isReminder" name="isReminder" ${milestone.isRemainder ? 'checked' : ''}><br>
+
+        <input type="submit" value="Update Milestone">
+    </form>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 package com.fssa.projectprovision;
 
 import java.io.IOException;
@@ -60,6 +61,8 @@ public class EditTaskServlet extends HttpServlet {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Failed to retrieve task: " + e.getMessage());
+
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
     }
 }

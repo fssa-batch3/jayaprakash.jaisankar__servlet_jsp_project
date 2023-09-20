@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,23 +35,26 @@ public class AddMilestoneServlet extends HttpServlet {
         LocalTime taskTime = LocalTime.parse(request.getParameter("taskTime"));
         boolean isReminder = Boolean.parseBoolean(request.getParameter("isReminder"));
 
+        // Retrieve user_id from the session
+        HttpSession session = request.getSession();
+        long userId = (long) session.getAttribute("userId"); // Assuming user_id is a long
+
+        // Retrieve task assignee from the form
+        String taskAssignee = request.getParameter("taskassignee");
+        System.out.println("Task Assignee: " + taskAssignee);
+
         Milestone milestone = new Milestone(taskId, taskText, taskDate, taskTime, isReminder);
 
-        try {
-            boolean created = milestoneService.insertMilestone(milestone);
-            if (created) {
-                response.setStatus(HttpServletResponse.SC_CREATED);
-                response.getWriter().write("Milestone created successfully");
-                response.sendRedirect(request.getContextPath() + "/projectTasksWithMilestones");
-                
-            } else {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().write("Failed to create milestone");
-            }
-        } catch (ServiceException e) {
-            e.printStackTrace();
+        boolean created = milestoneService.insertMilestone(milestone, userId, taskAssignee); // Pass userId and taskAssignee to the service method
+        if (created) {
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("Milestone created successfully");
+            response.sendRedirect(request.getContextPath() + "/projectTasksWithMilestones");
+            
+        } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Failed to add milestone: " + e.getMessage());
+            response.getWriter().write("Failed to create milestone");
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
     }
 }

@@ -87,6 +87,8 @@ public class RegistrationServlet extends HttpServlet {
         } catch (DAOException e) {
             e.printStackTrace();
             response.getWriter().write("User registration failed.");
+
+            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
     }
 }
