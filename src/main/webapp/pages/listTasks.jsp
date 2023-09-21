@@ -39,12 +39,14 @@
         %>
          <span class="task-status">Project Status <a href="<%= request.getContextPath() %>/pages/markAsCompleted?id=<%= task.getId() %>">Mark as Completed</a>
       </span>
+        <span class="task-status3"> <a href="<%=request.getContextPath()%>/projectTasksWithMilestones?taskId=<%= task.getId() %>">View</a></span>
+   
         <%
             } else {            	
         %>
          <span class="task-status">Project Status <a href="editTask?id=<%= task.getId() %>">View Details</a></span>
         <span class="task-status1"> <a href="deleteTask?id=<%= task.getId() %>">Delete</a></span>
-     <span class="task-status3"> <a href="<%=request.getContextPath()%>/projectTasksWithMilestones?taskId=<%= task.getId() %>">View</a></span>
+     <span class="task-status"> <a href="<%=request.getContextPath()%>/projectTasksWithMilestones?taskId=<%= task.getId() %>">View</a></span>
     
       <a href="<%= request.getContextPath() %>/pages/addmilestone.jsp?taskId=<%= task.getId() %>&taskassignee=<%= task.getTaskAssignee() %>">Add</a>
     <%

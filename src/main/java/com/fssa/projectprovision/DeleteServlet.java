@@ -34,7 +34,7 @@ public class DeleteServlet extends HttpServlet {
 
             if (deleted) {
                 // Redirect to the page displaying the list of tasks after successful deletion
-                response.sendRedirect(request.getContextPath() + "/projectTasksWithMilestones");
+                response.sendRedirect(request.getContextPath() + "/listTasks");
             } else {
                 // Handle the case where deletion fails, e.g., display an error message
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

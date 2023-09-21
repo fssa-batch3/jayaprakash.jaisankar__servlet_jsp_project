@@ -50,7 +50,8 @@ public class DeleteTaskServlet extends HttpServlet {
                 }
             } catch (DAOException e) {
                 response.getWriter().write("Error while deleting task.");
-            }
+                System.out.println(e)
+;            }
         } else {
             // Handle missing task ID parameter
             response.getWriter().write("Task ID parameter is missing.");

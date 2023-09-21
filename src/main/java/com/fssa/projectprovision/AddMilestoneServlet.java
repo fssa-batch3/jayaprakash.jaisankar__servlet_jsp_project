@@ -21,7 +21,6 @@ public class AddMilestoneServlet extends HttpServlet {
 
     @Override
     public void init() {
-        // Initialize the MilestoneService with the appropriate MilestoneDAO implementation
         milestoneService = new MilestoneService(new MilestoneDAO());
     }
 
@@ -49,7 +48,7 @@ public class AddMilestoneServlet extends HttpServlet {
         if (created) {
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.getWriter().write("Milestone created successfully");
-            response.sendRedirect(request.getContextPath() + "/projectTasksWithMilestones");
+            response.sendRedirect(request.getContextPath() + "/listTasks");
             
         } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

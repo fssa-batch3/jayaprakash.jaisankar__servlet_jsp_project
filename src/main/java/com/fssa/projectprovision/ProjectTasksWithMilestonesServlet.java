@@ -34,19 +34,27 @@ public class ProjectTasksWithMilestonesServlet extends HttpServlet {
         // Get the user ID from the session
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        System.out.println(userId);
-        String taskAssignee = (String) session.getAttribute("taskassignee"); // Retrieve taskassignee
-        System.out.println(taskAssignee);
-       
-        if (userId != null) {
-                List<Milestone> projectTasks = null;
-			try {
-				projectTasks = milestoneService.getProjectTasksWithMilestones(userId, taskAssignee);
-			} catch (ServiceException e) {
-				e.printStackTrace();
-			}
+        String taskAssignee = (String) session.getAttribute("taskassignee");
 
-            request.setAttribute("projectTasks", projectTasks);
+        if (userId != null) {
+            String taskIdParam = request.getParameter("taskId");
+            if (taskIdParam != null) {
+                try {
+                	int taskId = Integer.parseInt(taskIdParam);
+                	System.out.println(taskId);
+
+                    // Fetch milestones related to the specific task
+                    List<Milestone> milestones = milestoneService.getMilestonesByTaskId(taskId);
+
+                    request.setAttribute("milestones", milestones);
+                } catch (NumberFormatException e) {
+                    // Handle invalid taskId parameter
+                    // You can redirect or show an error message here
+                    // For simplicity, let's assume taskId is always valid for now
+                } catch (ServiceException e) {
+                    e.printStackTrace();
+                }
+            }
 
             request.getRequestDispatcher("/pages/projectTasksWithMilestones.jsp").forward(request, response);
         } else {

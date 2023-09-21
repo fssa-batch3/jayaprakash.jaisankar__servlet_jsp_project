@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.fssa.projectprovision.model.Milestone" %>
+<%@ page import="com.fssa.projectprovision.dao.MilestoneDAO" %>
+<%@ page import="com.fssa.projectprovision.service.MilestoneService" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +15,6 @@
     <script src="https://apis.google.com/js/api.js"></script>
  
     <style>
-      /* Add your CSS styles here */
       body {
         font-family: Arial, sans-serif;
         background-color: #e4e9f7;
@@ -28,13 +31,13 @@
 
       h1 {
         margin-top: 10px;
-            margin-left: 100px;
+        margin-left: 100px;
         margin-bottom: 30px;
       }
 
       .dis {
         margin-top: 20px;
-            margin-left: 100px;
+        margin-left: 100px;
         display: flex;
         justify-content: space-between;
         padding: 20px;
@@ -121,15 +124,23 @@
     </style>
 </head>
 <body>
-   
 <jsp:include page="sider.jsp" />
     <h1>List of Project Tasks with Milestones</h1>
-    <div id="task-list">
-        <%
-           List<Milestone> projectTasks = (List<Milestone>) request.getAttribute("projectTasks");
-       
-           if (projectTasks != null && !projectTasks.isEmpty()) {
-               for (Milestone milestone : projectTasks) {
+   <div id="task-list">
+     <%
+List<Milestone> projectTasks = (List<Milestone>) request.getAttribute("milestones");
+Long loggedInUserId = (Long) session.getAttribute("userId");
+System.out.println(loggedInUserId);
+
+if (projectTasks != null && !projectTasks.isEmpty()) {
+    for (Milestone milestone : projectTasks) {
+        MilestoneDAO milestoneDAO = new MilestoneDAO();
+        MilestoneService milestoneservice = new MilestoneService(milestoneDAO);
+        System.out.println("userID:"+ milestone.getCreatorId() );
+        Long milestoneCreatorId = milestoneservice.getCreatorId(milestone.getCreatorId() ); 
+        
+        System.out.println(milestoneCreatorId);
+        boolean isCreator = loggedInUserId.equals(milestoneCreatorId);
         %>
         <div class="dis">
             <span><%= milestone.getTaskText() %></span>
@@ -137,18 +148,22 @@
             <span><%= milestone.getTaskTime() %></span>
             <span><%= milestone.getIsRemainder() %></span>
             <div class="btn">
-                <a href="editmilestone?id=<%= milestone.getId() %>"><button class="edit-task">Edit</button></a>
-                <a href="deletemilestone?id=<%= milestone.getId() %>"><button class="delete-task">Delete</button></a>
+                <% if (isCreator) { %>
+                    <a href="editmilestone?id=<%= milestone.getId() %>"><button class="edit-task">Edit</button></a>
+                    <a href="deletemilestone?id=<%= milestone.getId() %>"><button class="delete-task">Delete</button></a>
+                <% } %>
             </div>
         </div>
         <%
-               }
-           } else {
-        %>
-        <p>No project tasks with milestones available.</p>
-        <%
-           }
-        %>
+    }
+} else {
+%>
+<p>No project tasks with milestones available.</p>
+<%
+}
+%>
+
+
     </div>
 </body>
 </html>
