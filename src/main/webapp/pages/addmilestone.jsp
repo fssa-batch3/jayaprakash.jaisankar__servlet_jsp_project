@@ -68,9 +68,14 @@ input[type="submit"]:hover {
 </head>
 <body> 
     <form id="add" action="<%=request.getContextPath()%>/AddMilestoneServlet" method="post">
-    
+    	<%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
         <!-- Include task ID as a hidden field -->
-        <input  type="text" name="taskId" value="<%=request.getParameter("taskId")%>">
+        <input  type="hidden" name="taskId" value="<%=request.getParameter("taskId")%>">
         
         <label for="taskText">Task Text:</label>
         <input type="text" id="taskText" name="taskText" required><br>
@@ -79,12 +84,11 @@ input[type="submit"]:hover {
         <input type="date" id="taskDate" name="taskDate" required><br>
 
    <label for="taskDate">Task Assignee:</label>
-        <input type="text" id="taskassignee" value="<%=request.getParameter("taskassignee")%>" name="taskassignee" required><br>
+        <input type="text" id="taskassignee" value="<%=request.getParameter("taskassignee")%>" name="taskassignee" disabled required><br>
         <label for="taskTime">Task Time:</label>
         <input type="time" id="taskTime" name="taskTime" required><br>
 
-        <label for="isReminder">Is Reminder:</label>
-        <input type="checkbox" id="isReminder" name="isReminder"><br>
+      
 
         <input type="submit" value="Add Milestone">
     </form>

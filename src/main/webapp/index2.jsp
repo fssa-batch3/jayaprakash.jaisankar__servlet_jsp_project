@@ -63,7 +63,7 @@ button[type="submit"] {
             <span class="link_name">My project's</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">My Project's</a></li>
+            <li><a class="link_name" href="<%=request.getContextPath()%>/pages/mytodo.jsp"">My Project's</a></li>
           </ul>
         </li>
         <li></li>
@@ -135,6 +135,7 @@ button[type="submit"] {
         </li>
         <li>
           <form action="<%= request.getContextPath() %>/logout" method="get" id="logoutbtn">
+          
             <button class="logoutbtn" type="submit">
               <i class="bx bx-log-out"></i>
               <span class="link_name">LogOut</span>
@@ -263,8 +264,15 @@ button[type="submit"] {
         <div id="popupContent">
           <h2 class="newtaskh1">Add New ProjectTask</h2>
           <br />
-
-           <form action="<%= request.getContextPath() %>/createTask" method="post" id="taskForm">
+         <%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
+           <form action="<%= request.getContextPath() %>/createTask" method="post" id="taskForm" onsubmit="return validateForm()">
+           
+     
         <div id="overflow">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="taskname" name="taskname" placeholder="Task Name" required />
@@ -279,8 +287,8 @@ button[type="submit"] {
                 <option disabled selected value="">Project Category</option>
          
                 <option value="Professional">Professional</option>
-                <option value="Academic Tasks">Academic</option>
-                <option value="Social/Event Tasks">Social</option>
+                <option value="Academic">Academic</option>
+                <option value="Social">Social</option>
             </select>
             <br />
             <div class="form-floating mb-3">
@@ -348,6 +356,35 @@ button[type="submit"] {
 
 
     
+    function validateForm() {
+       
+        var taskName = document.getElementById("taskname").value;
+        var taskCategory = document.getElementById("taskcategory").value;
+        var taskStatus = document.getElementById("taskstatus").value;
+        var taskPriority = document.getElementById("taskpriority").value;
+        var taskTags = document.getElementById("tasktags").value;
+        var todoId = document.getElementById("todoid").value;
+
+       
+        var taskNamePattern = /^[a-zA-Z0-9\s]+$/;
+        var taskCategoryPattern = /^[a-zA-Z\s]+$/;
+        var taskStatusPattern = /^[a-zA-Z\s]+$/;
+        var taskPriorityPattern = /^[a-zA-Z\s]+$/;
+        var taskTagsPattern = /^[a-zA-Z0-9,\s]+$/;
+        var todoIdPattern = /^[a-fA-F0-9]{32}$/;
+
+      
+        if (!taskNamePattern.test(taskName) || !taskCategoryPattern.test(taskCategory) || 
+            !taskStatusPattern.test(taskStatus) || !taskPriorityPattern.test(taskPriority) || 
+            !taskTagsPattern.test(taskTags) || !todoIdPattern.test(todoId)) {
+            alert("Invalid input format. Please check your input.");
+            return false;
+        }
+
+
+        return true; 
+        }
+
     </script> 
      </body>
 </html>

@@ -72,8 +72,10 @@ public class UpdateTaskServlet extends HttpServlet {
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            request.getRequestDispatcher("/listTasks?errorMessage="+ e.getMessage()).forward(request, response);
             response.getWriter().write("Failed to update task: " + e.getMessage());
         } catch (NumberFormatException | DateTimeParseException e) {
+        	 request.getRequestDispatcher("/listTasks?errorMessage="+ e.getMessage()).forward(request, response);
             response.getWriter().write("Invalid input format.");
         }
     }

@@ -63,6 +63,12 @@ button:hover {
 <body>
     <div class="login-container">
         <h1>Login</h1>
+        	<%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
         <form action="<%=request.getContextPath()%>/LoginServlet1" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br>

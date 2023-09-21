@@ -60,6 +60,9 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+input[type="hidden"] {
+display:none;
+}
 /* Style the submit button on hover */
 input[type="submit"]:hover {
     background-color: #555;
@@ -71,7 +74,13 @@ input[type="submit"]:hover {
     
 <jsp:include page="sider.jsp"></jsp:include>
     <form id="add" action="<%=request.getContextPath() %>/updatemilestone" method="post">
-        <input  name="taskId" value="${milestone.id }">
+    	<%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
+     <input type="hidden" name="taskId" value="${milestone.id}">
         <label for="taskText">Task Text:</label>
          <input type="text" id="taskText" name="taskText" value="${milestone.taskText}">
         <br>

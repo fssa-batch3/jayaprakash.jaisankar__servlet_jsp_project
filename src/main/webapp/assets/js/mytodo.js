@@ -13,20 +13,6 @@ sidebarBtn.addEventListener("click", () => {
   sidebar.classList.toggle("close");
 });
 
-//profile pic name show
-
-let todoRegister = JSON.parse(localStorage.getItem("todoRegister"));
-console.log(todoRegister);
-
-let todoLogin = JSON.parse(localStorage.getItem("todoLogin"));
-console.log(todoLogin);
-
-let findUser = todoRegister.find((user) => user.email == todoLogin);
-console.log(findUser);
-
-document.getElementById("profile_pic").src = findUser["profile_pic"];
-document.getElementById("profile_name").innerText = findUser["name"];
-
 //add task div open
 let addtask = document.getElementById("addtask");
 addtask.addEventListener("click", (event) => {
@@ -45,92 +31,7 @@ closetask.addEventListener("click", (event) => {
 
 //userobj array
 
-//add task
-let addnewtask = document.getElementById("form");
-addnewtask.addEventListener("submit", (event) => {
-  event.preventDefault();
 
-  if (JSON.parse(localStorage.getItem("todoArray")) !== null) {
-    todoArray = JSON.parse(localStorage.getItem("todoArray"));
-
-    let taskname = document.getElementById("taskname").value;
-    let taskdetails = document.getElementById("taskdetails").value;
-    let taskcategory = document.getElementById("taskcategory").value;
-    let taskdue = document.getElementById("taskdue").value;
-    let taskassignee = document.getElementById("taskassignee").value;
-    let taskstatus = document.getElementById("taskstatus").value;
-    let projectname = document.getElementById("projectname").value;
-    let taskpriority = document.getElementById("taskpriority").value;
-    let tasktags = document.getElementById("tasktags").value;
-    let todoID = Date.now();
-
-    let todoObj = {
-      taskname,
-      taskdetails,
-      taskcategory,
-      taskdue,
-      taskassignee,
-      taskstatus,
-      projectname,
-      taskpriority,
-      tasktags,
-      todoID,
-    };
-
-    console.log(todoObj);
-
-    let taskdues = document.getElementById("taskdue").value;
-    let selectedDate = new Date(taskdues);
-    let newDate = new Date();
-
-    if (selectedDate >= newDate) {
-      findUser["mytodos"].push(todoObj);
-
-      localStorage.setItem("todoRegister", JSON.stringify(todoRegister));
-
-      alert("Project Added Successfully");
-
-      location.reload();
-    } else {
-      alert("Project DueDate Must be Greater than or Equal to Today's Date");
-    }
-  } else {
-    let taskname = document.getElementById("taskname").value;
-    let taskdetails = document.getElementById("taskdetails").value;
-    let taskcategory = document.getElementById("taskcategory").value;
-    let taskdue = document.getElementById("taskdue").value;
-    let taskassignee = document.getElementById("taskassignee").value;
-    let taskstatus = document.getElementById("taskstatus").value;
-    let projectname = document.getElementById("projectname").value;
-    let taskpriority = document.getElementById("taskpriority").value;
-    let tasktags = document.getElementById("tasktags").value;
-    let todoID = Date.now();
-
-    let todoObj = {
-      taskname,
-      taskdetails,
-      taskcategory,
-      taskdue,
-      taskassignee,
-      taskstatus,
-      projectname,
-      taskpriority,
-      tasktags,
-      todoID,
-    };
-
-    console.log(todoObj);
-
-    //set this array in userobj
-    findUser["mytodos"].push(todoObj);
-
-    localStorage.setItem("todoRegister", JSON.stringify(todoRegister));
-
-    alert("Project Added Successfully");
-
-    location.reload();
-  }
-});
 
 //emoji api call
 // fetch("https://emoji-api.com/emojis?access_key=a63d8810c315f697d08ac9c241a0044f26203457")
@@ -139,7 +40,6 @@ addnewtask.addEventListener("submit", (event) => {
 // .catch(err => console.error(err))
 
 //for loop todos create
-console.log(findUser["mytodos"]);
 
 let tododiv;
 

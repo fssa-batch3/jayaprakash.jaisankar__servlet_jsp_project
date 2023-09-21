@@ -28,14 +28,12 @@ public class EditTaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Retrieve task ID from the request parameter
             String taskIdStr = request.getParameter("id");
             if (taskIdStr == null || taskIdStr.isEmpty()) {
                 response.getWriter().write("Task ID parameter is missing.");
                 return;
             }
             
-            // Validate and parse the task ID
             long taskId = -1;
             try {
                 taskId = Long.parseLong(taskIdStr);
@@ -44,25 +42,23 @@ public class EditTaskServlet extends HttpServlet {
                 return;
             }
             
-
-            // Retrieve the task to be edited
             Task task = taskService.getTaskById((int) taskId);
 
             if (task != null) {
-                // Set the task as an attribute in the request
                 request.setAttribute("task", task);
 
-                // Forward the request to the JSP page for editing
                 request.getRequestDispatcher("/pages/tododetails.jsp").forward(request, response);
             } else {
                 response.getWriter().write("Task not found.");
+                request.getRequestDispatcher("/pages/tododetails.jsp?errorMessage="+"Failed to retrieve task: Task not found.").forward(request, response);
+                
             }
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Failed to retrieve task: " + e.getMessage());
-
-            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
+            request.getRequestDispatcher("/pages/tododetails.jsp?errorMessage="+"Failed to retrieve task: " + e.getMessage()).forward(request, response);
+           
         }
     }
 }

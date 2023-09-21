@@ -53,7 +53,8 @@ public class AddMilestoneServlet extends HttpServlet {
         } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Failed to create milestone");
-            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
+        
+            response.sendRedirect(request.getContextPath() + "/pages/addmilestone.jsp?errorMessage=Failed to create milestone");
         }
     }
 }

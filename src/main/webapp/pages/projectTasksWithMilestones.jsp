@@ -107,6 +107,9 @@
       .todo span {
         font-size: 16px;
       }
+      p{
+      margin-left:100px;
+      }
 
       #add-task {
         background-color: #007bff;

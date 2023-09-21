@@ -94,18 +94,15 @@ public class ProfileServlet extends HttpServlet {
                 user.setAddress(address);
                 user.setAboutMe(aboutMe);
 
-                // Update the user's information in the database
                 UserService userService = new UserService();
                 userService.updateUser(user);
                 request.setAttribute("profilePicURL", profilePic);
-                // Redirect to a success page or display a success message
                 response.sendRedirect(request.getContextPath() + "/index2.jsp");
             } catch (Exception e) {
                 e.printStackTrace();
                 response.getWriter().write("An error occurred");
             }
         } else {
-            // User is not logged in, redirect to the login page or display an error message
             response.sendRedirect(request.getContextPath() + "/login.jsp");
         }
     }

@@ -16,6 +16,12 @@
 </head>
 <body>
 <jsp:include page="sider.jsp" />
+	<%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
 
 <%
     HttpSession ses = request.getSession();
@@ -37,8 +43,7 @@
            <%
             if (isTaskAssignee && !"Completed".equals(task.getTaskStatus())) {
         %>
-         <span class="task-status">Project Status <a href="<%= request.getContextPath() %>/pages/markAsCompleted?id=<%= task.getId() %>">Mark as Completed</a>
-      </span>
+        
         <span class="task-status3"> <a href="<%=request.getContextPath()%>/projectTasksWithMilestones?taskId=<%= task.getId() %>">View</a></span>
    
         <%
@@ -52,6 +57,12 @@
     <%
             }
         %>
+         <%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
         <p class="task-name">Project Name:<%= task.getTaskName() %></p>
         <p class="project-name"><i class='bx bx-briefcase'></i>Project Details:<%= task.getTaskDetails() %></p>
         <div class="task-due">

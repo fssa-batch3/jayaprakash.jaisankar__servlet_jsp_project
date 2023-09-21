@@ -30,7 +30,6 @@ public class DeleteTaskServlet extends HttpServlet {
             return;
         }
         
-        // Validate and parse the task ID
         int taskId = -1;
         try {
             taskId = Integer.parseInt(taskIdStr);
@@ -39,7 +38,6 @@ public class DeleteTaskServlet extends HttpServlet {
             return;
         }
         
-        // Delete the task from the database
         if (taskId != -1) {
             try {
                 boolean deleted = deleteTask(taskId);
@@ -50,11 +48,16 @@ public class DeleteTaskServlet extends HttpServlet {
                 }
             } catch (DAOException e) {
                 response.getWriter().write("Error while deleting task.");
+
+                response.sendRedirect(request.getContextPath() + "/listTasks?errorMessage=Failed to delete");
+
                 System.out.println(e)
 ;            }
         } else {
-            // Handle missing task ID parameter
             response.getWriter().write("Task ID parameter is missing.");
+
+            response.sendRedirect(request.getContextPath() + "/listTasks?errorMessage=Task ID parameter is missing.");
+
         }
     }
     

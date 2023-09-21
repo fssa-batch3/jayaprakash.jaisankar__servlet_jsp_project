@@ -120,7 +120,7 @@
           <div class="profile-details">
             <div class="profile-content">
               <img
-                src="https://ca.slack-edge.com/T032648LE-U041V83A4PL-e856d93352f7-512"
+                src="#"
                 alt="profileImg"
               />
             </div>
@@ -143,10 +143,11 @@
       <div id="todo-container">
         <div class="todo-edit-form">
           <form id="form"  action="updateTask" method="post">
+          
             <div id="divflex1">
               <div class="form-group">
               
-                 <input type=type="hidden"  name="taskId" value="${task.id}">
+                 <input type="hidden"  name="taskId" value="${task.id}">
                 <label for="taskname">Project Name:</label>
                 <input name="taskname" type="text" id="taskname" value="${task.taskName}"/>
               </div>
@@ -167,10 +168,9 @@
         required
     >
         <option disabled selected value="">Select Project Category</option>
-        <option value="Personal Tasks" ${task.taskCategory == 'Personal Tasks' ? 'selected' : ''}>Personal</option>
-        <option value="Work/Professional Tasks" ${task.taskCategory == 'Work/Professional Tasks' ? 'selected' : ''}>Work/Professional</option>
-        <option value="Academic Tasks" ${task.taskCategory == 'Academic Tasks' ? 'selected' : ''}>Academic</option>
-        <option value="Social/Event Tasks" ${task.taskCategory == 'Social/Event Tasks' ? 'selected' : ''}>Social/Event</option>
+          <option value="Professional" ${task.taskCategory == 'Professional' ? 'selected' : ''}>Professional</option>
+        <option value="Academic" ${task.taskCategory == 'Academic' ? 'selected' : ''}>Academic</option>
+        <option value="Social" ${task.taskCategory == 'Social' ? 'selected' : ''}>Social</option>
     </select>
               </div>
               <br />
@@ -234,10 +234,11 @@
               </div>
               <input type="hidden" name="todoid" value="${task.todoId}" />
             </div>
-
-             <button  class="update"type="submit">Update</button> 
-           
+<div>  <button  class="update"type="submit">Update</button></div>
           </form>
+             
+           
+         
         </div>
       </div>
     </section>
@@ -247,7 +248,41 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
+<script>
 
+
+
+function validateForm() {
+   
+    var taskName = document.getElementById("projectname").value;
+    var taskCategory = document.getElementById("taskcategory").value;
+    var taskStatus = document.getElementById("taskstatus").value;
+    var taskPriority = document.getElementById("taskpriority").value;
+    var taskTags = document.getElementById("tasktags").value;
+    var todoId = document.getElementById("todoid").value;
+
+   
+    var taskNamePattern = /^[a-zA-Z0-9\s]+$/;
+    var taskCategoryPattern = /^[a-zA-Z\s]+$/;
+    var taskStatusPattern = /^[a-zA-Z\s]+$/;
+    var taskPriorityPattern = /^[a-zA-Z\s]+$/;
+    var taskTagsPattern = /^[a-zA-Z0-9,\s]+$/;
+    var todoIdPattern = /^[a-fA-F0-9]{32}$/;
+
+  
+    if (!taskNamePattern.test(taskName) || !taskCategoryPattern.test(taskCategory) || 
+        !taskStatusPattern.test(taskStatus) || !taskPriorityPattern.test(taskPriority) || 
+        !taskTagsPattern.test(taskTags) || !todoIdPattern.test(todoId)) {
+        alert("Invalid input format. Please check your input.");
+        return false;
+    }
+
+
+    return true; 
+    }
+
+</script> 
+</script>
     <script src="<%=request.getContextPath()%>/assets/js/tododetails.js"></script>
   </body>
 </html>

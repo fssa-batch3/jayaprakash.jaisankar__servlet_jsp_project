@@ -27,6 +27,8 @@ public class EditMilestoneServlet extends HttpServlet {
 		    taskId = Long.parseLong(taskIdStr);
 		} catch (NumberFormatException e) {
 		    response.getWriter().write("Invalid Task ID format.");
+		    response.sendRedirect(request.getContextPath() + "/pages/editmilestone.jsp?errorMessage=Invalid Task ID format.");
+
 		    return;
 		}
 
@@ -44,8 +46,8 @@ public class EditMilestoneServlet extends HttpServlet {
 		    request.getRequestDispatcher("/pages/editmilestone.jsp").forward(request, response);
 		} else {
 		    response.getWriter().write("Milestone not found.");
+		    response.sendRedirect(request.getContextPath() + "/pages/editmilestone.jsp?errorMessage=Milestone not found.");
 
-            response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
 		}
     }
 }

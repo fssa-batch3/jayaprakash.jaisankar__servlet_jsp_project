@@ -55,7 +55,7 @@ public class UpdateMilestoneServlet extends HttpServlet {
 			}
 
             if (updated) {
-                response.sendRedirect(request.getContextPath()+"/projectTasksWithMilestones"); // Redirect to the milestone list page
+                response.sendRedirect(request.getContextPath() + "/listTasks"); // Redirect to the milestone list page
             } else {
                 response.getWriter().write("Failed to update milestone.");
             }

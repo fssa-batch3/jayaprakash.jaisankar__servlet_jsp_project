@@ -90,6 +90,7 @@ boolean created = taskService.createTask(task, userId);
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            request.getRequestDispatcher("/index2.jsp?errorMessage="+"Failed to create task: " + e.getMessage()).forward(request, response);
             response.getWriter().write("Failed to create task: " + e.getMessage());
         }
     }
