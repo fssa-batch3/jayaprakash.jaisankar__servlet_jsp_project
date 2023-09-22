@@ -25,26 +25,22 @@ public class AddMilestoneServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Get task ID from the form parameter
+      
         int taskId = Integer.parseInt(request.getParameter("taskId"));
 
-        // Retrieve other milestone details from the form
         String taskText = request.getParameter("taskText");
         LocalDate taskDate = LocalDate.parse(request.getParameter("taskDate"));
         LocalTime taskTime = LocalTime.parse(request.getParameter("taskTime"));
         boolean isReminder = Boolean.parseBoolean(request.getParameter("isReminder"));
 
-        // Retrieve user_id from the session
         HttpSession session = request.getSession();
-        long userId = (long) session.getAttribute("userId"); // Assuming user_id is a long
-
-        // Retrieve task assignee from the form
+        long userId = (long) session.getAttribute("userId"); 
         String taskAssignee = request.getParameter("taskassignee");
         System.out.println("Task Assignee: " + taskAssignee);
 
         Milestone milestone = new Milestone(taskId, taskText, taskDate, taskTime, isReminder);
 
-        boolean created = milestoneService.insertMilestone(milestone, userId, taskAssignee); // Pass userId and taskAssignee to the service method
+        boolean created = milestoneService.insertMilestone(milestone, userId, taskAssignee); 
         if (created) {
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.getWriter().write("Milestone created successfully");

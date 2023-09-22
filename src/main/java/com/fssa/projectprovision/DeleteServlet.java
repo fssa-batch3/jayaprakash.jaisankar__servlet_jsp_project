@@ -22,27 +22,19 @@ import java.sql.SQLException;
 public class DeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get the ID of the milestone to delete from the request parameter
         String milestoneIdString = request.getParameter("id");
-
-        // Check if the milestoneIdString is not null and is a valid integer
-        if (milestoneIdString != null && milestoneIdString.matches("\\d+")) {
+ if (milestoneIdString != null && milestoneIdString.matches("\\d+")) {
             int milestoneId = Integer.parseInt(milestoneIdString);
-
-            // Delete the milestone by its ID using the deleteMilestoneByTodoId method
-            boolean deleted = deleteMilestoneByTodoId(milestoneId);
+   boolean deleted = deleteMilestoneByTodoId(milestoneId);
 
             if (deleted) {
-                // Redirect to the page displaying the list of tasks after successful deletion
-                response.sendRedirect(request.getContextPath() + "/listTasks");
+               response.sendRedirect(request.getContextPath() + "/listTasks");
             } else {
-                // Handle the case where deletion fails, e.g., display an error message
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.sendRedirect(request.getContextPath() + "/listTasks?errorMessage=Failed to delete");
                 response.getWriter().println("deleteed the milestone.");
             }
         } else {
-            // Handle the case where the ID is not valid, e.g., display an error message
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.sendRedirect(request.getContextPath() + "/listTasks?errorMessage=Failed to delete");
 
@@ -51,7 +43,6 @@ public class DeleteServlet extends HttpServlet {
         }
     }
 
-    // Method to delete a milestone by its ID
     private boolean deleteMilestoneByTodoId(int id) {
         String query = "DELETE FROM milestone WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -63,7 +54,6 @@ public class DeleteServlet extends HttpServlet {
             return rowsAffected > 0;
 
         } catch (SQLException e) {
-            // Log the exception for debugging purposes
             e.printStackTrace();
             return false;
         }

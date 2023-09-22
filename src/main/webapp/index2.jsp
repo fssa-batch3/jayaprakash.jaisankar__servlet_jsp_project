@@ -348,10 +348,9 @@ button[type="submit"] {
         let isDarkModeOn = false;
 
         darkModeToggle.addEventListener('click', () => {
-            // Toggle the dark mode
+          
             isDarkModeOn = !isDarkModeOn;
 
-            // Add or remove the dark-mode class from the body
             document.body.classList.toggle('dark-mode', isDarkModeOn);
         });
     </script>

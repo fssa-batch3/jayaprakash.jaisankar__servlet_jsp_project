@@ -23,16 +23,13 @@ public class ListMilestonesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Call the method to retrieve project tasks with milestones from the database
-		
+     	
 		
 		List<Milestone> projectTasks = MilestoneDAO.getProjectTasksWithMilestones();
 
-		// Set the list of project tasks as an attribute in the request
 		request.setAttribute("projectTasks", projectTasks);
 
-		// Forward the request to a JSP page for rendering
-		request.getRequestDispatcher("/projectTasksWithMilestones.jsp").forward(request, response);
+			request.getRequestDispatcher("/projectTasksWithMilestones.jsp").forward(request, response);
     }
 
     private void handleError(String message, HttpServletResponse response) throws IOException {

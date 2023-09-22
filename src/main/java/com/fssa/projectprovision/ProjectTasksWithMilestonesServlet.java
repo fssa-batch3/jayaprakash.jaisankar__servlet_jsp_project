@@ -20,7 +20,7 @@ import com.fssa.projectprovision.exception.ServiceException;
 
 @WebServlet("/projectTasksWithMilestones")
 public class ProjectTasksWithMilestonesServlet extends HttpServlet {
-    private MilestoneService milestoneService; // Create an instance variable
+    private MilestoneService milestoneService; 
 
     @Override
     public void init() throws ServletException {
@@ -31,8 +31,7 @@ public class ProjectTasksWithMilestonesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get the user ID from the session
-        HttpSession session = request.getSession();
+       HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         String taskAssignee = (String) session.getAttribute("taskassignee");
 
@@ -54,7 +53,6 @@ public class ProjectTasksWithMilestonesServlet extends HttpServlet {
 
             request.getRequestDispatcher("/pages/projectTasksWithMilestones.jsp").forward(request, response);
         } else {
-            // Redirect to the login page or handle the case when the user is not logged in
             response.sendRedirect("pages/login3.jsp");
         }
     }

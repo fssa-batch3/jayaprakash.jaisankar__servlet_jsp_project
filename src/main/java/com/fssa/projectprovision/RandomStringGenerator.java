@@ -9,7 +9,7 @@ public class RandomStringGenerator {
     public static String generateRandomString(int length) {
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            int randomCharIndex = random.nextInt(16); // 16 characters in [0-9a-fA-F]
+            int randomCharIndex = random.nextInt(16); 
             char randomChar = "0123456789abcdefABCDEF".charAt(randomCharIndex);
             sb.append(randomChar);
         }

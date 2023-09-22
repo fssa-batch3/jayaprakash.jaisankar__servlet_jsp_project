@@ -44,11 +44,9 @@ import com.fssa.projectprovision.exception.ServiceException;
 	            List<Task> taskList;
 
 	            if (assigneeEmail != null && !assigneeEmail.isEmpty()) {
-	                // If a search parameter is provided, filter tasks by assignee's Gmail
-	                taskList = taskService.getTasksByAssigneeEmail(assigneeEmail);
+	                  taskList = taskService.getTasksByAssigneeEmail(assigneeEmail);
 	            } else {
-	                // If no search parameter is provided, get all tasks
-	                taskList = taskService.getAllTasks();
+	               taskList = taskService.getAllTasks();
 	            }
 
 	            request.setAttribute("taskList", taskList);

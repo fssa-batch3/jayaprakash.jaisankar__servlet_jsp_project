@@ -40,15 +40,13 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String taskDateStr = request.getParameter("taskDate"); 
         String taskTimeStr = request.getParameter("taskTime"); 
 
-        // Parse the taskDate and taskTime strings into Date and Time objects
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         
         Date taskDate = dateFormat.parse(taskDateStr);
         Date taskTime = timeFormat.parse(taskTimeStr);
 
-        // Convert Date and Time objects to LocalDate and LocalTime
-        LocalDate localTaskDate = taskDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+       LocalDate localTaskDate = taskDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalTime localTaskTime = taskTime.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
 
         HttpSession session = request.getSession();

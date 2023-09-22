@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-@WebServlet("/updatemilestone") // Make sure the URL mapping is correct
+@WebServlet("/updatemilestone") 
 public class UpdateMilestoneServlet extends HttpServlet {
     private MilestoneService milestoneService;
 
@@ -30,14 +30,11 @@ public class UpdateMilestoneServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Retrieve milestone data from the form
             int milestoneId = Integer.parseInt(request.getParameter("taskId"));
             String taskText = request.getParameter("taskText");
             LocalDate taskDate = LocalDate.parse(request.getParameter("taskDate"));
             LocalTime taskTime = LocalTime.parse(request.getParameter("taskTime"));
-            boolean isReminder = "on".equals(request.getParameter("isReminder")); // Assuming checkbox sends "on" when checked
-
-            // Create a Milestone object with the updated data
+            boolean isReminder = "on".equals(request.getParameter("isReminder")); 
             Milestone updatedMilestone = new Milestone();
             updatedMilestone.setId(milestoneId);
             updatedMilestone.setTaskText(taskText);
@@ -45,17 +42,16 @@ public class UpdateMilestoneServlet extends HttpServlet {
             updatedMilestone.setTaskTime(taskTime);
             updatedMilestone.setIsRemainder(isReminder);
 
-            // Use MilestoneService to update the milestone in the database
             boolean updated = false;
 			try {
 				updated = milestoneService.updateMilestone(updatedMilestone);
 		} catch (DAOException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 
             if (updated) {
-                response.sendRedirect(request.getContextPath() + "/listTasks"); // Redirect to the milestone list page
+                response.sendRedirect(request.getContextPath() + "/listTasks"); 
             } else {
                 response.getWriter().write("Failed to update milestone.");
             }

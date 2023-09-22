@@ -25,8 +25,7 @@ public class RegistrationServlet extends HttpServlet {
 
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Extract user input from the request parameters
-		String name = request.getParameter("name");
+     	String name = request.getParameter("name");
 		if (name == null || name.trim().isEmpty()) {
 		    response.getWriter().write("Name parameter is missing or empty.");
 		    return;
@@ -52,17 +51,12 @@ public class RegistrationServlet extends HttpServlet {
         } 
         String password = request.getParameter("password");
 
-        // Generate a unique user ID using the current timestamp
-        
-
-        // Set default values for optional attributes
-        
+       
                String defaultProfilePic = "default_profile.png";
         String defaultMyTodos = "";
         long userId = System.currentTimeMillis();
 
-        // Create a new User object with the extracted data and default values
-        User newUser = new User();
+         User newUser = new User();
         newUser.setName(name);
         newUser.setGender(gender);
         newUser.setMobileNumber(mobileNumber);
@@ -75,8 +69,7 @@ public class RegistrationServlet extends HttpServlet {
         newUser.setPassword(password);
         newUser.setUserId(userId);
 
-        // Call the createUser method in the UserDAO class
-        try {
+       try {
             boolean userCreated = UserDAO.createUser(newUser);
             if (userCreated) {
             	request.setAttribute("profilePicURL", defaultProfilePic);

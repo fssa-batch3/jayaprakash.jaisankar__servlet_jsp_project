@@ -2,6 +2,7 @@ package com.fssa.projectprovision;
 
 import java.io.IOException;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,7 +20,11 @@ import com.fssa.projectprovision.exception.ServiceException;
 
 @WebServlet("/updateTask")
 public class UpdateTaskServlet extends HttpServlet {
-    private TaskService taskService;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private TaskService taskService;
 
     @Override
     public void init() throws ServletException {
@@ -31,12 +36,12 @@ public class UpdateTaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Retrieve task data from the form
+            
             long taskId = Long.parseLong(request.getParameter("taskId"));
             String taskName = request.getParameter("taskname");
             String taskDetails = request.getParameter("taskdetails");
             String taskCategory = request.getParameter("taskcategory");
-            String taskDueStr = request.getParameter("taskdue"); // Date format as a string
+            String taskDueStr = request.getParameter("taskdue"); 
             String taskAssignee = request.getParameter("taskassignee");
             String taskStatus = request.getParameter("taskstatus");
             String projectName = request.getParameter("projectname");
@@ -45,10 +50,8 @@ public class UpdateTaskServlet extends HttpServlet {
             String todoid= request.getParameter("todoid");
             
             
-            // Convert String to LocalDate for taskDue
             LocalDate taskDue = LocalDate.parse(taskDueStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-            // Create a Task object with the updated data
             Task updatedTask = new Task();
             updatedTask.setId((int) taskId);
             updatedTask.setTaskName(taskName);
@@ -61,11 +64,10 @@ public class UpdateTaskServlet extends HttpServlet {
             updatedTask.setTaskPriority(taskPriority);
             updatedTask.setTaskTags(taskTags);
             updatedTask.setTodoId(todoid);
-            // Use TaskService to update the task in the database
             String updated = taskService.updateTask(updatedTask);
 
             if (updated != null) {
-                response.sendRedirect("listTasks"); // Redirect to the task list page
+                response.sendRedirect("listTasks"); 
             } else {
                 response.getWriter().write("Failed to update task.");
                 request.getRequestDispatcher("/listTasks?errorMessage=Failed to update task.").forward(request, response);

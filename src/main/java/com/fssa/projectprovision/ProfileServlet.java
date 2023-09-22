@@ -21,26 +21,20 @@ public class ProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false); // Get the existing session, don't create a new one if it doesn't exist
-
+        HttpSession session = request.getSession(false); 
         if (session != null && session.getAttribute("userId") != null) {
-            // User is logged in, retrieve user information from the session
-            long userId = (long) session.getAttribute("userId");
+             long userId = (long) session.getAttribute("userId");
 
             try {
-                // Create an instance of UserService
-                UserService userService = new UserService();
+               UserService userService = new UserService();
                 
-                // Retrieve user information from the database using the userId
-                User user = userService.getUserById(userId);
+                 User user = userService.getUserById(userId);
 
                 if (user != null) {
-                    // Forward to the profile page with user information
-                    request.setAttribute("user", user);
+                      request.setAttribute("user", user);
                     request.getRequestDispatcher("/pages/Profile.jsp").forward(request, response);
                 } else {
-                    // Handle the case where the user is not found in the database
-                    response.getWriter().write("User not found");
+                   response.getWriter().write("User not found");
                 }
             } catch (ServiceException e) {
                 e.printStackTrace();
@@ -49,7 +43,6 @@ public class ProfileServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
             }
         } else {
-            // User is not logged in, redirect to the login page or display an error message
             response.sendRedirect(request.getContextPath() + "/login.jsp");
         }
     }
@@ -57,12 +50,10 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = request.getSession(false); // Get the existing session, don't create a new one if it doesn't exist
 
         if (session != null && session.getAttribute("userId") != null) {
-            // User is logged in, retrieve user information from the session
-            long userId = (long) session.getAttribute("userId");
+           long userId = (long) session.getAttribute("userId");
 
             try {
-                // Retrieve updated user information from the form parameters
-                String name = request.getParameter("name");
+             String name = request.getParameter("name");
                 String gender = request.getParameter("gender");
                 String mobileNumber = request.getParameter("mobileNumber");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
