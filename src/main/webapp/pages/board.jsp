@@ -6,15 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProjectProVision</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mytodo.css" />
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-          crossorigin="anonymous" />
-    <!-- Boxicons CSS -->
-    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-    <style>
+ <style>
     @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Tinos&display=swap');
 * {
   margin: 0;
@@ -598,7 +590,7 @@
           </div>
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Category</a></li>
-            <li><a href="/pages/PersonalTasks.jsp">Personal </a></li>
+            <li><a href="/pages/PersonalTasks.html">Personal </a></li>
             <li><a href="#">Work/Professional </a></li>
             <li><a href="#">Academic </a></li>
 
@@ -659,17 +651,74 @@
       </ul>
     </div>
     
-    <div id="todo-container" class="app"><a class="tododiv" id="tododiv1">    
-     <span id="taskstatus1" style="background-color:#8BC34A; color:black;">High</span><div id="todoinnerdiv1" class="todoinnerdivs">
-     <p id="noresultsfound-p" style="display: block;">High Priority Project <br>Section Is Empty</p>
-     </div></a><a class="tododiv" id="tododiv2">    <span id="taskstatus1" style="background-color:#FFC107; color:black;">Medium</span>
-     <div id="todoinnerdiv2" class="todoinnerdivs">
-     <p id="noresultsfound2-p" style="display: block;">Medium Priority Project <br>Section Is Empty</p>
-     </div></a><a class="tododiv" id="tododiv3">    <span id="taskstatus1" style="background-color:#F44336; color:white;">Low</span>
-     <div id="todoinnerdiv3" class="todoinnerdivs">
-     <p id="noresultsfound3-p" style="display: block;">Low Priority Project  <br>Section Is Empty</p>
-     
-    
-    
+    <div class="app">
+        <!-- Div for completed tasks -->
+        <div class="tododiv" id="completedTasksDiv">
+            <span id="taskstatus1" style="background-color:#8BC34A; color:black;">Completed</span>
+            <div id="completedTasksInnerDiv" class="todoinnerdivs">
+                <%
+                for (Task task : completedTasksList) {
+                %>
+             <div class="todo-item">
+    <p><strong>Task Name:</strong> <%= task.getName() %></p>
+    <p><strong>Task Description:</strong> <%= task.getDescription() %></p>
+    <p><strong>Assigned To:</strong> <%= task.getAssignee() %></p>
+    <p><strong>Due Date:</strong> <%= task.getDueDate() %></p>
+    <!-- Add more task details as needed -->
+</div>
+                <%
+                    }
+                %>
+       <!-- Add a message if no completed tasks are found -->
+<p id="noresultsfound-p" style="display: ${empty completedTasksList ? 'block' : 'none'};">No completed tasks</p>
+    </div>
+        </div>
+
+        <!-- Div for not completed tasks -->
+        <div class="tododiv" id="notCompletedTasksDiv">
+            <span id="taskstatus1" style="background-color:#FFC107; color:black;">Not Completed</span>
+            <div id="notCompletedTasksInnerDiv" class="todoinnerdivs">
+                <%
+                for (Task task : notCompletedTasksList) {
+                %>
+               <div class="todo-item">
+    <p><strong>Task Name:</strong> <%= task.getName() %></p>
+    <p><strong>Task Description:</strong> <%= task.getDescription() %></p>
+    <p><strong>Assigned To:</strong> <%= task.getAssignee() %></p>
+    <p><strong>Due Date:</strong> <%= task.getDueDate() %></p>
+    <!-- Add more task details as needed -->
+</div>
+                <%
+                    }
+                %>
+                <!-- Add a message if no not completed tasks are found -->
+                <p id="noresultsfound2-p" style="display: <%= notCompletedTasksList.isEmpty() ? 'block' : 'none' %>;">No not completed tasks</p>
+            </div>
+        </div>
+
+        <!-- Div for currently working tasks -->
+        <div class="tododiv" id="currentlyWorkingTasksDiv">
+            <span id="taskstatus1" style="background-color:#F44336; color:white;">Currently Working</span>
+            <div id="currentlyWorkingTasksInnerDiv" class="todoinnerdivs">
+                <%
+                for (Task task : currentlyWorkingTasksList) {
+                %>
+             <div class="todo-item">
+    <p><strong>Task Name:</strong> <%= task.getName() %></p>
+    <p><strong>Task Description:</strong> <%= task.getDescription() %></p>
+    <p><strong>Assigned To:</strong> <%= task.getAssignee() %></p>
+    <p><strong>Due Date:</strong> <%= task.getDueDate() %></p>
+    <!-- Add more task details as needed -->
+</div>
+                <%
+                    }
+                %>
+                <!-- Add a message if no currently working tasks are found -->
+                <p id="noresultsfound3-p" style="display: <%= currentlyWorkingTasksList.isEmpty() ? 'block' : 'none' %>;">No currently working tasks</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Your JavaScript and other HTML content here -->
 </body>
 </html>

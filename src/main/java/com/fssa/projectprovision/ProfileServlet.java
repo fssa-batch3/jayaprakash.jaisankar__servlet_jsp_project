@@ -81,7 +81,6 @@ public class ProfileServlet extends HttpServlet {
                 String address = request.getParameter("address");
                 String aboutMe = request.getParameter("aboutMe");
 
-                // Create a User object with the updated information
                 User user = new User();
                 user.setUserId(userId);
                 user.setName(name);
@@ -101,6 +100,8 @@ public class ProfileServlet extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
                 response.getWriter().write("An error occurred");
+                request.getRequestDispatcher("/pages/Profile.jsp?errorMessage=An error occurred").forward(request, response);
+                
             }
         } else {
             response.sendRedirect(request.getContextPath() + "/login.jsp");

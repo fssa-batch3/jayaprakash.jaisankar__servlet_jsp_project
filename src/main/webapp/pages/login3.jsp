@@ -69,13 +69,15 @@ button:hover {
 		out.println("<p>" + errorMessage + "</p>");
 	}
 	%>
-        <form action="<%=request.getContextPath()%>/LoginServlet1" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
-            <button type="submit">Login</button>
-        </form>
+      <form action="<%=request.getContextPath()%>/LoginServlet1" method="post">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" placeholder="name@example.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)" required>
+  <br>
+  <label for="password">Password:</label>
+  <input type="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="password" required>
+  <button type="submit">Login</button>
+</form>
+
     </div>
 </body>
 </html>

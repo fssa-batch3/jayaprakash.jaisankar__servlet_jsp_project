@@ -43,15 +43,11 @@ public class ProjectTasksWithMilestonesServlet extends HttpServlet {
                 	int taskId = Integer.parseInt(taskIdParam);
                 	System.out.println(taskId);
 
-                    // Fetch milestones related to the specific task
                     List<Milestone> milestones = milestoneService.getMilestonesByTaskId(taskId);
 
                     request.setAttribute("milestones", milestones);
                 } catch (NumberFormatException e) {
-                    // Handle invalid taskId parameter
-                    // You can redirect or show an error message here
-                    // For simplicity, let's assume taskId is always valid for now
-                } catch (ServiceException e) {
+                               } catch (ServiceException e) {
                     e.printStackTrace();
                 }
             }
@@ -66,5 +62,6 @@ public class ProjectTasksWithMilestonesServlet extends HttpServlet {
     private void handleError(String message, HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         response.getWriter().write(message);
+        
     }
 }

@@ -57,7 +57,7 @@ public class EditTaskServlet extends HttpServlet {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Failed to retrieve task: " + e.getMessage());
-            request.getRequestDispatcher("/pages/tododetails.jsp?errorMessage="+"Failed to retrieve task: " + e.getMessage()).forward(request, response);
+            request.getRequestDispatcher("/pages/tododetails.jsp?errorMessage=" + e.getMessage()).forward(request, response);
            
         }
     }

@@ -22,6 +22,17 @@
     <!-- End -->
     <script src="https://apis.google.com/js/api.js"></script>
     <style>
+
+
+body #change {
+    background-color: black;
+    
+}
+
+.bx-moon {
+    font-size: 24px;
+}
+
     
     #search {
     display: flex;
@@ -124,15 +135,7 @@ button[type="submit"] {
             <li><a class="link_name" href="#">Settings</a></li>
           </ul>
         </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-moon"></i>
-            <span class="link_name">Dark Mode</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dark Mode</a></li>
-          </ul>
-        </li>
+       
         <li>
           <form action="<%= request.getContextPath() %>/logout" method="get" id="logoutbtn">
           
@@ -200,59 +203,13 @@ button[type="submit"] {
           <h1 class="todohead">All project's</h1>
         </div>
 
-        <form action="<%= request.getContextPath() %>/searchsort" method="GET">
-    <div>
-        <select
-            class="form-select"
-            aria-label="Default select example"
-            id="sort"
-            name="sortCriteria" 
-            required
-        >
-            <option disabled selected value="">Sort</option>
-            <option id="option1" value="Based On Due date">
-                Based On Due date
-            </option>
-            <option id="option2" value="A-Z (Ascending Order)">
-                A-Z (Ascending Order)
-            </option>
-            <option id="option3" value="Z-A (Descending Order)">
-                Z-A (Descending Order)
-            </option>
-        </select>
-    </div>
-    &emsp;
-    <div>
-        <select
-            class="form-select"
-            aria-label="Default select example"
-            id="filter"
-            name="filterCriteria" 
-            required
-        >
-            <option disabled selected value="">Filter</option>
-            <option value="Based On Category">Based On Category</option>
-            <option value="Based On Assignee">Based On Assignee</option>
-            <option value="Based On Status">Based On Status</option>
-            <option value="Based On Priority">Based On Priority</option>
-            <option value="Based On Tags">Based On Tags</option>
-        </select>
-    </div>
-
-    <div class="searchcategory">
-        <i class="bx bx-search" id="searchicon"></i>
-        <input
-            type="search"
-            id="searchbarfilter"
-            class="form-control mr-sm-2"
-            type="search"
-            aria-label="Search"
-            name="searchKeyword" 
-        />
-        <button type="submit">Search</button> 
-    </div>
-</form>
-
+     
+<%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<p>" + errorMessage + "</p>");
+	}
+	%>
       </div>
       <div id="todo-container"></div>
       <div id="todo-container2"></div>
@@ -265,9 +222,9 @@ button[type="submit"] {
           <h2 class="newtaskh1">Add New ProjectTask</h2>
           <br />
          <%
-	String errorMessage = request.getParameter("errorMessage");
+	String errorMessag = request.getParameter("errorMessage");
 	if (errorMessage != null) {
-		out.println("<p>" + errorMessage + "</p>");
+		out.println("<p>" + errorMessag + "</p>");
 	}
 	%>
            <form action="<%= request.getContextPath() %>/createTask" method="post" id="taskForm" onsubmit="return validateForm()">
@@ -275,11 +232,11 @@ button[type="submit"] {
      
         <div id="overflow">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="taskname" name="taskname" placeholder="Task Name" required />
+               <input type="text" class="form-control" id="taskname" name="taskname" placeholder="Task Name"  minlength="3" required  pattern="^[a-zA-Z0-9]+$" title="Please enter only letters and numbers." />
                 <label for="taskname">Task Name</label>
             </div>
             <div class="form-floating">
-                <textarea class="form-control" id="taskdetails" name="taskdetails" placeholder="Leave a comment here" style="height: 100px" required></textarea>
+                <textarea class="form-control" id="taskdetails" name="taskdetails"  minlength="3" placeholder="Leave a comment here" style="height: 100px" required></textarea>
                 <label for="taskdetails">Project Details</label>
             </div>
             <br />
@@ -292,23 +249,23 @@ button[type="submit"] {
             </select>
             <br />
             <div class="form-floating mb-3">
-                <input type="date" class="form-control taskdue" id="taskdue" name="taskdue" required />
+                <input type="date" class="form-control taskdue" id="taskdue" name="taskdue" min="<%=java.time.LocalDate.now()%>" required />
                 <label for="taskdue">Project DueDate</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="taskassignee" name="taskassignee" placeholder="name@example.com" required />
-                <label for="taskassignee">Project Assignee</label>
+               <input type="email" class="form-control" id="taskassignee" name="taskassignee" placeholder="name@example.com" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)">
+<label for="taskassignee">Project Assignee</label>
+
             </div>
             <select class="form-select" aria-label="Default select example" name="taskstatus" required>
                 <option disabled selected value="">Project Status</option>
                 <option value="Completed">Completed</option>
                 <option value="Currently Working">Currently Working</option>
-                <option value="Not Completed (Incomplete)">Not Completed</option>
                 <option value="Not Yet Started">Not Yet Started</option>
             </select>
             <br />
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="projectname" name="projectname" placeholder="Project Name" value="ProjectPerformance" />
+                <input type="text" class="form-control" id="projectname" name="projectname" placeholder="Project Name" pattern="^[a-zA-Z0-9]+$" title="Please enter only letters and numbers." value="ProjectPerformance" />
                 <label for="projectname">Project Name</label>
             </div>
             <select class="form-select" aria-label="Default select example" name="taskpriority" required>
@@ -319,8 +276,8 @@ button[type="submit"] {
             </select>
             <br />
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="tasktags" name="tasktags" placeholder="Project Tags (Optional)" />
-                <label for="tasktags">Project Tags (Optional)</label>
+                <input type="text" class="form-control" id="tasktags" minlength="3" name="tasktags" placeholder="Project Tags" required />
+                <label for="tasktags">Project Tags</label>
             </div>
 
             <button type="button" id="closePopup" class="btn btn-danger">Cancel</button>
@@ -386,5 +343,17 @@ button[type="submit"] {
         }
 
     </script> 
+    <script>
+        const darkModeToggle = document.getElementById('change');
+        let isDarkModeOn = false;
+
+        darkModeToggle.addEventListener('click', () => {
+            // Toggle the dark mode
+            isDarkModeOn = !isDarkModeOn;
+
+            // Add or remove the dark-mode class from the body
+            document.body.classList.toggle('dark-mode', isDarkModeOn);
+        });
+    </script>
      </body>
 </html>

@@ -42,14 +42,14 @@ public class DeleteTaskServlet extends HttpServlet {
             try {
                 boolean deleted = deleteTask(taskId);
                 if (deleted) {
-                    response.sendRedirect("listTasks");
+                    response.sendRedirect(request.getContextPath()+"/listTasks");
                 } else {
                     response.getWriter().write("Failed to delete task.");
                 }
             } catch (DAOException e) {
                 response.getWriter().write("Error while deleting task.");
 
-                response.sendRedirect(request.getContextPath() + "/listTasks?errorMessage=Failed to delete");
+                response.sendRedirect(request.getContextPath() + "/pages/listTasks.jsp?errorMessage=" + e.getMessage());
 
                 System.out.println(e)
 ;            }

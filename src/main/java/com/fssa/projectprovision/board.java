@@ -16,10 +16,13 @@ import com.fssa.projectprovision.service.TaskService;
 import com.fssa.projectprovision.dao.TaskDAO;
 import com.fssa.projectprovision.exception.ServiceException;
 
-@WebServlet("/taskDetails")
-public class listtaskdate extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private TaskService taskService;
+@WebServlet("/board")
+public class board extends HttpServlet {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private TaskService taskService;
 
     @Override
     public void init() throws ServletException {
@@ -33,24 +36,22 @@ public class listtaskdate extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             Long userId = (Long) session.getAttribute("userId");
-
+            String taskAssignee = (String) session.getAttribute("taskassignee"); 
             if (userId != null) {
-                String date = request.getParameter("date");
-                List<Task> taskList = taskService.getTasksForDate(date);
-                request.setAttribute("taskList", taskList); 
-
-                request.getRequestDispatcher("/pages/taskDetails.jsp").forward(request, response);
+                List<Task> taskList = taskService.getTasksForUser(userId, taskAssignee);
+                request.setAttribute("taskList", taskList);
+                request.getRequestDispatcher("pages/board.jsp").forward(request, response);
             } else {
-            	 response.sendRedirect(request.getContextPath() + "/index2.jsp?errorMessage=Failed to retrieve tasks.");
-
-                response.sendRedirect( request.getContextPath()+ "/pages/login3.jsp");
+                response.sendRedirect("pages/login3.jsp");
             }
         } catch (ServiceException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Failed to retrieve tasks: " + e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/index2.jsp?errorMessage="+e.getMessage());
-
+            request.getRequestDispatcher("/pages/board.jsp?errorMessage="+ e.getMessage()).forward(request, response);
+            
         }
     }
+
+
 }

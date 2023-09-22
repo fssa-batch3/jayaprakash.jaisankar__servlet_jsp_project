@@ -94,7 +94,7 @@
           </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="<%=request.getContextPath()%>/ProfileServlet">
             <i class="bx bx-cog"></i>
             <span class="link_name">Settings</span>
           </a>
@@ -102,15 +102,7 @@
             <li><a class="link_name" href="#">Settings</a></li>
           </ul>
         </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-moon"></i>
-            <span class="link_name">Dark Mode</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dark Mode</a></li>
-          </ul>
-        </li>
+       
         <li>
           <form action="<%= request.getContextPath() %>/logout" method="get" id="logoutbtn">
             <button class="logoutbtn" type="submit">

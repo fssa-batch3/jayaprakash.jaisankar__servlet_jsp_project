@@ -74,17 +74,16 @@ input[type="submit"]:hover {
 		out.println("<p>" + errorMessage + "</p>");
 	}
 	%>
-        <!-- Include task ID as a hidden field -->
         <input  type="hidden" name="taskId" value="<%=request.getParameter("taskId")%>">
         
         <label for="taskText">Task Text:</label>
-        <input type="text" id="taskText" name="taskText" required><br>
+        <input type="text" id="taskText" name="taskText" required minlength="3" pattern="^[a-zA-Z0-9]+$" title="Please enter only letters and numbers." ><br>
 
         <label for="taskDate">Task Date:</label>
-        <input type="date" id="taskDate" name="taskDate" required><br>
+        <input type="date" id="taskDate" name="taskDate" required min="<%=java.time.LocalDate.now()%>"><br>
 
    <label for="taskDate">Task Assignee:</label>
-        <input type="text" id="taskassignee" value="<%=request.getParameter("taskassignee")%>" name="taskassignee" disabled required><br>
+        <input type="text" id="taskassignee" value="<%=request.getParameter("taskassignee")%>" name="taskassignee" readonly><br>
         <label for="taskTime">Task Time:</label>
         <input type="time" id="taskTime" name="taskTime" required><br>
 
@@ -92,5 +91,26 @@ input[type="submit"]:hover {
 
         <input type="submit" value="Add Milestone">
     </form>
+    <script>
+    function setDefaultTime() {
+        var currentDate = new Date();
+        var defaultTime = new Date(currentDate.getTime() + 5 * 60 * 60 * 1000);
+        var formattedTime = defaultTime.toTimeString().slice(0, 5);
+
+        document.getElementById("taskTime").value = formattedTime;
+    }
+
+    document.getElementById("taskDate").addEventListener("change", function () {
+        var selectedDate = new Date(this.value);
+        var currentDate = new Date();
+
+        if (selectedDate.toDateString() === currentDate.toDateString()) {
+            setDefaultTime();
+            document.getElementById("taskTime").setAttribute("readonly", "true");
+        } else {
+            document.getElementById("taskTime").removeAttribute("readonly");
+        }
+    });
+</script>
 </body>
 </html>

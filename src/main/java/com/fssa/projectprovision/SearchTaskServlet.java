@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.service.TaskService;
@@ -36,6 +37,9 @@ import com.fssa.projectprovision.exception.ServiceException;
 	    protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 	        try {
+	        	  HttpSession session = request.getSession();
+	              Long userId = (Long) session.getAttribute("userId");
+	              String taskAssignee = (String) session.getAttribute("taskassignee"); 
 	            String assigneeEmail = request.getParameter("assigneeEmail"); // Get the search parameter
 	            List<Task> taskList;
 
@@ -48,13 +52,13 @@ import com.fssa.projectprovision.exception.ServiceException;
 	            }
 
 	            request.setAttribute("taskList", taskList);
-	            request.getRequestDispatcher("pages/listTasks.jsp").forward(request, response);
+	            request.getRequestDispatcher("pages/search.jsp").forward(request, response);
 	        } catch (ServiceException e) {
 	            e.printStackTrace();
 	            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	            response.getWriter().write("Failed to retrieve tasks: " + e.getMessage());
-
-                response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
+	            request.getRequestDispatcher("/index2.jsp?errorMessage=An error occurred").forward(request, response);
+	            
 	        }
 	    }
 	}

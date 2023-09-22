@@ -68,6 +68,8 @@ public class UpdateTaskServlet extends HttpServlet {
                 response.sendRedirect("listTasks"); // Redirect to the task list page
             } else {
                 response.getWriter().write("Failed to update task.");
+                request.getRequestDispatcher("/listTasks?errorMessage=Failed to update task.").forward(request, response);
+                
             }
         } catch (ServiceException e) {
             e.printStackTrace();

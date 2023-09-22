@@ -37,8 +37,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     try {
         String taskName = request.getParameter("taskName");
         boolean remainder = Boolean.parseBoolean(request.getParameter("remainder"));
-        String taskDateStr = request.getParameter("taskDate"); // Assuming this is in a format like "yyyy-MM-dd"
-        String taskTimeStr = request.getParameter("taskTime"); // Assuming this is in a format like "HH:mm"
+        String taskDateStr = request.getParameter("taskDate"); 
+        String taskTimeStr = request.getParameter("taskTime"); 
 
         // Parse the taskDate and taskTime strings into Date and Time objects
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,7 +70,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         }
     } catch (Exception e) {
         e.printStackTrace();
-        response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
+        request.getRequestDispatcher("/index2.jsp?errorMessage=An error occurred").forward(request, response);
+        
     }
 }
 }

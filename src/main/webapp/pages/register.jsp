@@ -59,7 +59,7 @@
             </div>
             <div class="form-group">
                 <label for="mobileNumber">Mobile Number:</label>
-                <input type="text" id="mobileNumber" name="mobileNumber" required>
+                <input type="text" id="mobileNumber" minlength="10" name="mobileNumber" required>
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Date of Birth:</label>
@@ -67,11 +67,11 @@
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" placeholder="name@example.com" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)" >
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" maxlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="password" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Register">

@@ -23,7 +23,7 @@
         <div class="btns">
           <div>
             <form action="pages/login3.jsp">
-              <button type="submit" class="login-btn">LogIn</button>&emsp;
+              <button type="submit" class="login-btn">LogIn</button>&emsp;	
             </form>
           </div>
           <div>
@@ -50,7 +50,7 @@
               <p>Manage your Project</p>
               <p class="small">You can Manage project in this Website</p>
               <div class="go-corner" href="#">
-                <div class="go-arrow">â</div>
+                <div class="go-arrow"></div>
               </div>
             </a>
           </div>
@@ -60,7 +60,7 @@
               <p>Task Management</p>
               <p class="small">We have Task Managent</p>
               <div class="go-corner" href="#">
-                <div class="go-arrow">â</div>
+                <div class="go-arrow"></div>
               </div>
             </a>
           </div>
@@ -70,7 +70,6 @@
               <p>Invite Members</p>
               <p class="small">You can invite members in your team.</p>
               <div class="go-corner" href="#">
-                <div class="go-arrow">â</div>
               </div>
             </a>
           </div>
@@ -83,7 +82,7 @@
                 You can manage your personal tasks in this website.
               </p>
               <div class="go-corner" href="#">
-                <div class="go-arrow">â</div>
+                <div class="go-arrow"></div>
               </div>
             </a>
           </div>
@@ -113,7 +112,7 @@
 
     <footer>
       <p>
-        Â© 2023 <span><i class="bx bx-task"></i> TodoMaster</span>. All rights
+        © 2023 <span><i class="bx bx-task"></i> TodoMaster</span>. All rights
         reserved.
       </p>
     </footer>

@@ -39,6 +39,7 @@ public class ListPersonalTasksServlet extends HttpServlet {
             request.getRequestDispatcher("/pages/viewPersonalTask.jsp").forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
+            
             response.sendRedirect(request.getContextPath() + "/pages/error.jsp");
         }
     }

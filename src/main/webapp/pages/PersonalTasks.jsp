@@ -160,14 +160,14 @@
       <form id="task-form	" action="<%= request.getContextPath() %>/personal" method="post">
     <div class="full">
         <div class="todo">
-            <input type="text" id="task" name="taskName" placeholder="Enter a task" />
+            <input type="text" id="task" name="taskName" placeholder="Enter a task"  minlength="3" pattern="^[a-zA-Z0-9]+$" title="Please enter only letters and numbers." />
         </div>
         <div class="todo">
             <input type="checkbox" id="remain" name="remainder" /><span>Remainder</span>
         </div>
         <div class="todo">
             <label for="date">Select date:</label>
-            <input type="date" id="date" name="taskDate" />
+            <input type="date" id="date" name="taskDate"  min="<%=java.time.LocalDate.now()%>" />
         </div>
         <div class="todo">
             <label for="time">Select time:</label>
@@ -181,6 +181,16 @@
         <div id="task-list"></div>
       </div>
     </div>
+     <script>
+      const currentTime = new Date();
+      currentTime.setHours(currentTime.getHours() + 5);
+      const formattedTime = currentTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+
+      window.onload = function () {
+          document.getElementById('time').min = formattedTime;
+      };
+
+</script>
     <script>
   function toggleTaskForm() {
     var taskForm = document.getElementById("task-form");

@@ -44,7 +44,7 @@ public class LoginServlet1 extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().write("An error occurred");
-            request.getRequestDispatcher("/pages/login3.jsp?errorMessage=An error occurred").forward(request, response);
+            request.getRequestDispatcher("/pages/login3.jsp?errorMessage="+e.getMessage()).forward(request, response);
           
         }
     }

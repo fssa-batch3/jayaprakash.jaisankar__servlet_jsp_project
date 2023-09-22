@@ -44,7 +44,6 @@ public class Searchsort extends HttpServlet {
                 // Handle searching based on the searchKeyword
                 taskList = taskService.getFilteredAndSortedTasks(sortCriteria, filterCriteria, searchKeyword);
             } else {
-                // Handle cases without searchKeyword (e.g., no search or only sort/filter)
                 taskList = taskService.getAllTasks();
             }
 
