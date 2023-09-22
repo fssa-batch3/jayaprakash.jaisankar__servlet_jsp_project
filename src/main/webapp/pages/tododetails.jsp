@@ -142,7 +142,7 @@
     
       <div id="todo-container">
         <div class="todo-edit-form">
-          <form id="form"  action="updateTask" method="post">
+          <form id="form"  action="userupdate" method="post">
           
             <div id="divflex1">
               <div class="form-group">
@@ -198,7 +198,7 @@
         <option value="Completed" ${task.taskStatus == 'Completed' ? 'selected' : ''}>Completed</option>
         <option value="Currently Working" ${task.taskStatus == 'Currently Working' ? 'selected' : ''}>Currently Working</option>
         <option value="Not Yet Started" ${task.taskStatus == 'Not Yet Started' ? 'selected' : ''}>Not Yet Started</option>
-    </select>
+    </select> 
               </div>
               <br />
               <div class="form-group">

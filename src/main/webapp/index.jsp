@@ -79,7 +79,7 @@
             <a class="card1" href="#">
               <p>Personal Task management</p>
               <p class="small">
-                You can manage your personal tasks in this website.
+                You can manage your personal here.
               </p>
               <div class="go-corner" href="#">
                 <div class="go-arrow"></div>

@@ -81,7 +81,7 @@
             <input type="text" id="address" name="address" value="${user.address}" required><br><br>
      
          <div class="form-group">
-                <input type="submit" value="Register">
+                <input type="submit" value="Update">
             </div>
         </form>
     </div>
