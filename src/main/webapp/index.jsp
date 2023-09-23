@@ -89,7 +89,7 @@
         </div>
 
         <div class="container">
-          <h3 lass="termsandconditionsh1">Project management</h3>
+          <h3 class="termsandconditionsh1">Project management</h3>
           <p class="termsandconditions">
             Project management is a strategic process that orchestrates diverse
             elements to accomplish defined objectives. It encompasses
