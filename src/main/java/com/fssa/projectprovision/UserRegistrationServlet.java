@@ -55,8 +55,9 @@ public class UserRegistrationServlet extends HttpServlet {
             }
         } catch (ServiceException e) {
             e.printStackTrace();
-            request.getRequestDispatcher("/pages/register.jsp?errorMessage="+e.getMessage()).forward(request, response);
-               response.getWriter().write("Registration Failed");
+                     response.getWriter().write("Registration Failed"+e.getMessage());
+                     request.getRequestDispatcher("/pages/register.jsp?errorMessage="+e.getMessage()).forward(request, response);
+                     
         }
 
     }
