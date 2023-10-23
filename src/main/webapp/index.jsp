@@ -28,7 +28,7 @@
           </div>
           <div>
             <form action="pages/register.jsp">
-              <button type="submit" class="signup-btn">SignUp</button>
+              <button type="submit" class="signup-btn">SignUp	</button>
             </form>
           </div>
         </div>

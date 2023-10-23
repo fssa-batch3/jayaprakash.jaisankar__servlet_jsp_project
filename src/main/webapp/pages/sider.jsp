@@ -41,7 +41,7 @@
             <span class="link_name">My project's</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">My Project's</a></li>
+            <li><a class="link_name" href="<%=request.getContextPath()%>/pages/mytodo.jsp"">My Project's</a></li>
           </ul>
         </li>
         <li></li>
@@ -65,27 +65,39 @@
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Category</a></li>
             <li><a href="<%=request.getContextPath()%>/pages/PersonalTasks.jsp">Personal Tasks</a></li>
-            <li><a href="#">Work/Professional Tasks</a></li>
+            <li><a href="#">Professional Tasks</a></li>
             <li><a href="#">Academic Tasks</a></li>
           </ul>
         </li>
         <li>
-          <div class="icon-link">
-            <a href="#">
-              <i class="bx bx-news"></i>
-              <span class="link_name">Templates</span>
-            </a>
-            <i class="bx bxs-chevron-down arrow"></i>
-          </div>
-          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Templates</a></li>
-            <li><a href="<%=request.getContextPath()%>/pages/freetemplates.jsp">Free Templates</a></li>
-            <li><a href="#">Paid Templates</a></li>
+           <li>
+            <form action="<%= request.getContextPath() %>/listTasks" method="get" id="logoutbtn">
+            <button class="logoutbtn" type="submit">
+                <i class="bx bx-news"></i>
+            </button>
+          </form>
+           <ul class="sub-menu blank">
+          <li><a class="link_name" href="">Dashboard</a></li>
+     
           </ul>
-        </li>
-        <li></li>
+            </li>
+            
+            <li>
+          <li>
+    <a class="link_name" href="<%= request.getContextPath()%>/listPersonalTasks">
+        <button class="logoutbtn" type="button">
+            <i class="bx bx-news"></i>
+        </button>
+    </a>
+               <ul class="sub-menu blank">
+          <li><a class="link_name" >Personals Dashboard</a></li>
+     
+          </ul>
+    
+</li>
+
         <li>
-          <a href="#">
+          <a href="<%= request.getContextPath() %>/calendar">
             <i class="bx bx-refresh"></i>
             <span class="link_name">Recurring Project's</span>
           </a>
@@ -94,7 +106,7 @@
           </ul>
         </li>
         <li>
-          <a href="<%=request.getContextPath()%>/ProfileServlet">
+          <a href="#">
             <i class="bx bx-cog"></i>
             <span class="link_name">Settings</span>
           </a>
@@ -105,26 +117,28 @@
        
         <li>
           <form action="<%= request.getContextPath() %>/logout" method="get" id="logoutbtn">
+          
             <button class="logoutbtn" type="submit">
               <i class="bx bx-log-out"></i>
-              <span class="link_name">LogOut</span>
-            </button>
+               </button>
           </form>
           <ul class="sub-menu blank">
             <li><a class="link_name" href="#">LogOut</a></li>
           </ul>
         </li>
         <li>
+        
+        
+        
+          
           <div class="profile-details">
-    <a class="profile-content" href="<%=request.getContextPath()%>/ProfileServlet">
-        <img id="profile_pic" src="<c:out value='${profilePicURL}'/>" alt="profileImg" />
-    </a>
-    <div class="name-job">
-        <div class="profile_name" id="profile_name"><c:out value='${user.name}'/></div>
-        <div class="job">Project User</div>
-    </div>
-</div>
-
+            <a class="profile-content" href="<%=request.getContextPath()%>/ProfileServlet">
+              <img id="profile_pic" src="" alt="profileImg" />
+            </a>
+            <div class="name-job">
+              <div class="profile_name" id="profile_name"></div>
+              <div class="job">Project User</div>
+            </div>
             <i class="bx bx-log-out"></i>
           </div>
         </li>

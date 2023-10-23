@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.fssa.projectprovision.model.Milestone" %>
-<%@ page import="com.fssa.projectprovision.dao.MilestoneDAO" %>
-<%@ page import="com.fssa.projectprovision.service.MilestoneService" %>
+<%@ page import="com.fssa.projectprovision.model.PersonalTask" %>
+<%@ page import="com.fssa.projectprovision.service.PersonalTaskService" %>
+<%@ page import="com.fssa.projectprovision.exception.ServiceException" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 
-<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>List of Project Tasks with Milestones</title>
-    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style2.css" />
-    <script src="https://apis.google.com/js/api.js"></script>
- 
-    <style>
+    <title>List of Personal Tasks</title>
+   <style>
       body {
         font-family: Arial, sans-serif;
         background-color: #e4e9f7;
@@ -147,48 +143,36 @@ span:contains("Remainder: ") {
     </style>
 </head>
 <body>
-<jsp:include page="sider.jsp" />
-    <h1>List of Project Tasks with Milestones</h1>
-   <div id="task-list">
-     <%
-List<Milestone> projectTasks = (List<Milestone>) request.getAttribute("milestones");
-Long loggedInUserId = (Long) session.getAttribute("userId");
-System.out.println(loggedInUserId);
+    <jsp:include page="sider.jsp" />
 
-if (projectTasks != null && !projectTasks.isEmpty()) {
-    for (Milestone milestone : projectTasks) {
-    	 MilestoneDAO milestoneDAO = new MilestoneDAO();
-         MilestoneService milestoneservice = new MilestoneService(milestoneDAO);
-         Long milestoneCreatorId = milestoneservice.getCreatorId(milestone.getCreatorId());
-         boolean isCreator = loggedInUserId.equals(milestoneCreatorId);
-         boolean showButtons = !milestone.getIsRemainder(); 
-  %>
-        <div class="dis">
-            <span class="title">Task:  <%= milestone.getTaskText() %></span>
-            <span class="title">TaskDueDate:  <%= milestone.getTaskDate() %></span>
-            <span class="title">TaskTime:  <%= milestone.getTaskTime() %></span>
-            <span class="title">Completed:  <%= milestone.getIsRemainder() %></span>
-            <div class="btn">
-                <% if (isCreator && showButtons) { %>
-                    <a href="editmilestone?id=<%= milestone.getId() %>"><button class="edit-task">Edit</button></a>
-                    <a href="deletemilestone?id=<%= milestone.getId() %>"><button class="delete-task">Delete</button></a>
-                <% } %>
-            </div>
-        </div>
+    <h1>List of Personal Tasks</h1>
+    <div id="task-list">
         <%
-    }
-} else {
-%>
-<p>No project tasks with milestones available.</p>
-<%
-}
-%>
+        List<PersonalTask> tasks = (List<PersonalTask>) request.getAttribute("tasks");
+        Long loggedInUserId = (Long) session.getAttribute("userId");
 
-
+        if (tasks != null && !tasks.isEmpty()) {
+            for (PersonalTask task : tasks) {
+                %>
+                <div class="dis">
+                    <span class="title">Task: <%= task.getTaskName() %></span>
+                    <span class="title">TaskDueDate: <%= task.getTaskDate() %></span>
+                    <span class="title">TaskTime: <%= task.getTaskTime() %></span>
+                    <span class="title">Remainder: <%= task.isRemainder() %></span>
+                    <div class="btn">
+                        <%-- Add your condition for isCreator here --%>
+                        <a href="editpersonal?id=<%= task.getTaskId() %>"><button class="edit-task">Edit</button></a>
+                        <a href="deletepersonal?id=<%= task.getTaskId() %>"><button class="delete-task">Delete</button></a>
+                    </div>
+                </div>
+                <%
+            }
+        } else {
+        %>
+        <p>No personal tasks available.</p>
+        <%
+        }
+        %>
     </div>
 </body>
 </html>
-
-
-
-

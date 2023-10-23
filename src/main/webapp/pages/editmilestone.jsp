@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>Edit Milestone</title>
     <style>
-        /* Apply basic styling to the entire page */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,7 +13,6 @@
             background-color: #f2f2f2;
         }
 
-        /* Style the header */
         h1 {
             text-align: center;
             background-color: #333;

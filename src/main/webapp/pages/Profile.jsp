@@ -1,94 +1,136 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.fssa.projectprovision.model.User" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.fssa.projectprovision.model.User" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
-    <title>User Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f4f4f4;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        input[type="submit"] {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/login.css" />
+<style>
+  header {
+    background-color: #0D6EFD;
+    color: #fff;
+    padding: 2px;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  .vh-100{
+  margin-top:-69px;
+  }
+  form{
+  margin-top:120px;
+  }
+  .up{
+  margin-top:-50px;
+  }
+ </style>
 </head>
 <body>
-    <div class="container">
-        <h2>User Registration</h2>
-        <form action="<%= request.getContextPath() %>//ProfileServlet" method="post" onsubmit="return validateForm()">
+
+<section class="vh-100">
+
+<jsp:include page="sider.jsp" />
+
+  <div class="container-fluid h-custom">
+  
+  
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          
+    <form action="<%= request.getContextPath() %>//ProfileServlet" method="post" onsubmit="return validateForm()">
         <%
 	String errorMessage = request.getParameter("errorMessage");
 	if (errorMessage != null) {
 		out.println("<p>" + errorMessage + "</p>");
 	}
 	%>
-            <div class="form-group">
+              <div class="form-outline mb-4">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name"  value="${user.name}" required>
+                <input type="text" id="name" class="form-control form-control-lg" value="${user.name}" name="name" required>
             </div>
-            <div class="form-group">
+             <div class="form-outline mb-4">
                 <label for="gender">Gender:</label>
-                <input type="text" id="gender" value="${user.gender}"  name="gender" required>
+                <input type="text" id="gender" class="form-control form-control-lg" value="${user.gender}" name="gender" required>
             </div>
-            <div class="form-group">
+            <div class="form-outline mb-4">
                 <label for="mobileNumber">Mobile Number:</label>
-                <input type="text" id="mobileNumber" value="${user.mobileNumber}" name="mobileNumber" required>
+                <input type="text" id="mobileNumber" value="${user.mobileNumber}" class="form-control form-control-lg minlength="10" name="mobileNumber" required>
             </div>
-            <div class="form-group">
+              <div class="form-outline mb-4">
+              
                 <label for="dateOfBirth">Date of Birth:</label>
-                <input type="date" id="dateOfBirth" value="${user.dateOfBirth}" name="dateOfBirth" required>
+                <input type="date" id="dateOfBirth" class="form-control form-control-lg" value="${user.dateOfBirth}" name="dateOfBirth" required>
             </div>
-          <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" id="email" value="${user.email}" name="email" required readonly>
-</div>
-
-            <div class="form-group">
-                <input type="hidden" id="password" value="${user.password}"name="password" required>
+            <div class="form-outline mb-4">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control form-control-lg"  value="${user.email}"  readonly placeholder="name@example.com" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)" >
             </div>
-            <label for="password">profile_pic:</label>
-                <input type="url" id="password" value="${user.profilePic}"name="profilePic" required>
+      <div class="form-outline mb-4">
+                <input  type="hidden" id="password" class="form-control form-control-lg" value="${user.password}" maxlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="password" required>
+            </div>
             
+            
+      <div class="form-outline mb-4">
+            <label for="password">profile_pic:</label>
+                <input type="url"  class="form-control form-control-lg" id="password" value="${user.profilePic}"name="profilePic" required>
+            </div>
+      <div class="form-outline mb-4">
               <label for="address">Address:</label>
-            <input type="text" id="address" name="address" value="${user.address}" required><br><br>
-     
-         <div class="form-group">
+            <input type="text" class="form-control form-control-lg" id="address" name="address" value="${user.address}" required><br><br>
+     </div>
+            <div class="up">
                 <input type="submit" value="Update">
             </div>
         </form>
+
+          
+          </div>
+
+        </form>
+      </div>
     </div>
-    
-    
-    
-    <script>
+  </div>
+
+  
+</section>
+<script>
         function validateForm() {
             const name = document.getElementById("name").value;
             const gender = document.getElementById("gender").value;

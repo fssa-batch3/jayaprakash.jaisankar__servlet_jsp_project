@@ -37,7 +37,7 @@
   <body>
   
   
-  <form id="form"  action="updateTask" method="post">
+  <form id="form"  action="<%=request.getContextPath()%>/updateTask" method="post">
           
             <div id="divflex1">
               <div class="form-group  display-none">

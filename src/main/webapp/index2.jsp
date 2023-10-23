@@ -103,20 +103,32 @@ button[type="submit"] {
           </ul>
         </li>
         <li>
-          <div class="icon-link">
-            <a href="#">
-              <i class="bx bx-news"></i>
-              <span class="link_name">Templates</span>
-            </a>
-            <i class="bx bxs-chevron-down arrow"></i>
-          </div>
-          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Templates</a></li>
-            <li><a href="<%=request.getContextPath()%>/pages/freetemplates.jsp">Free Templates</a></li>
-            <li><a href="#">Paid Templates</a></li>
+           <li>
+            <form action="<%= request.getContextPath() %>/listTasks" method="get" id="logoutbtn">
+            <button class="logoutbtn" type="submit">
+                <i class="bx bx-news"></i>
+            </button>
+          </form>
+           <ul class="sub-menu blank">
+          <li><a class="link_name" href="">Dashboard</a></li>
+     
           </ul>
-        </li>
-        <li></li>
+            </li>
+            
+            <li>
+          <li>
+    <a class="link_name" href="<%= request.getContextPath()%>/listPersonalTasks">
+        <button class="logoutbtn" type="button">
+            <i class="bx bx-news"></i>
+        </button>
+    </a>
+               <ul class="sub-menu blank">
+          <li><a class="link_name" >Personals Dashboard</a></li>
+     
+          </ul>
+    
+</li>
+
         <li>
           <a href="<%= request.getContextPath() %>/calendar">
             <i class="bx bx-refresh"></i>
@@ -141,8 +153,7 @@ button[type="submit"] {
           
             <button class="logoutbtn" type="submit">
               <i class="bx bx-log-out"></i>
-              <span class="link_name">LogOut</span>
-            </button>
+               </button>
           </form>
           <ul class="sub-menu blank">
             <li><a class="link_name" href="#">LogOut</a></li>
@@ -151,11 +162,7 @@ button[type="submit"] {
         <li>
         
         
-          <form action="<%= request.getContextPath() %>/listTasks" method="get" id="logoutbtn">
-            <button class="logoutbtn" type="submit">
-              <span class="link_name">Dashboard</span>
-            </button>
-          </form>
+        
           
           <div class="profile-details">
             <a class="profile-content" href="<%=request.getContextPath()%>/ProfileServlet">
@@ -202,7 +209,15 @@ button[type="submit"] {
         <div>
           <h1 class="todohead">All project's</h1>
         </div>
-
+        </div>
+        <form action="<%= request.getContextPath() %>/calendar" method="GET">
+        <div  class="flex-sort">
+        <label>Search Task:</label>   
+        <input type="date">
+        
+        <button>Search</button>
+        </div>
+</form>
      
 <%
 	String errorMessage = request.getParameter("errorMessage");

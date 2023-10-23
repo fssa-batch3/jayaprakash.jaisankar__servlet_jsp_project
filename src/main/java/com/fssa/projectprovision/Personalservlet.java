@@ -62,7 +62,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         boolean taskAdded = taskService.createPersonalTask(task);
 
         if (taskAdded) {
-            response.sendRedirect(request.getContextPath() + "/index2.jsp");
+            response.sendRedirect(request.getContextPath() + "/listPersonalTasks");
         } else {
             response.sendRedirect(request.getContextPath() + "/error.jsp");
         }

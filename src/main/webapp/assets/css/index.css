@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #E4E9F7;
+    background-color: #ffffff;
   }
   .logo-title {
   position: relative;
@@ -11,7 +11,7 @@ body {
   left: 20px;
   }
   header {
-    background-color: #00356F;
+    background-color: #0D6EFD;
     color: #fff;
     padding: 5px;
   }
@@ -102,7 +102,7 @@ body {
   
   footer {
   margin-bottom:0px;
-    background-color: #00356F;
+    background-color: #0D6EFD;
     color: #fff;
     padding: 5px;
   text-align: center;
@@ -160,7 +160,7 @@ body {
     overflow: hidden;
     top: 0;
     right: 0;
-    background-color: #00356F;
+    background-color: #0D6EFD;
     border-radius: 0 4px 0 32px;
   }
   
@@ -190,7 +190,7 @@ body {
     z-index: -1;
     top: -16px;
     right: -16px;
-    background: #00356F;
+    background: #0D6EFD;
     height: 32px;
     width: 32px;
     border-radius: 32px;

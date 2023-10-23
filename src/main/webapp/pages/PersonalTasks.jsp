@@ -53,7 +53,7 @@
       }
 
       .task-text {
-        flex-grow: 1; /* Take up remaining space to keep buttons on the right */
+        flex-grow: 1; 
       }
       .dis {
         margin-top: 20px;
@@ -195,9 +195,9 @@
   function toggleTaskForm() {
     var taskForm = document.getElementById("task-form");
     if (taskForm.style.display === "none" || taskForm.style.display === "") {
-      taskForm.style.display = "block"; // Show the form
+      taskForm.style.display = "block"; 
     } else {
-      taskForm.style.display = "none"; // Hide the form
+      taskForm.style.display = "none"; 
     }
   }
 </script>
