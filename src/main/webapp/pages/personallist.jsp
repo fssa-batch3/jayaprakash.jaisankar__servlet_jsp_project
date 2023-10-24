@@ -139,8 +139,12 @@ span:contains("TaskTime: ") {
 span:contains("Remainder: ") {
   color: purple;
 }
-      
+      .pagination-buttons{
+      margin-left:100px;
+      }
     </style>
+    
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/page.css" />
 </head>
 <body>
     <jsp:include page="sider.jsp" />
@@ -150,10 +154,17 @@ span:contains("Remainder: ") {
         <%
         List<PersonalTask> tasks = (List<PersonalTask>) request.getAttribute("tasks");
         Long loggedInUserId = (Long) session.getAttribute("userId");
+        
+        int pageSize = 5; 
+        int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+        int totalTasks = tasks.size();
+        int totalPages = (int) Math.ceil((double) totalTasks / pageSize);
+        int startIndex = (currentPage - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, totalTasks);
 
         if (tasks != null && !tasks.isEmpty()) {
-            for (PersonalTask task : tasks) {
-                %>
+        	for (int i = startIndex; i < endIndex; i++) {
+        		PersonalTask task = tasks.get(i);       %>
                 <div class="dis">
                     <span class="title">Task: <%= task.getTaskName() %></span>
                     <span class="title">TaskDueDate: <%= task.getTaskDate() %></span>
@@ -164,7 +175,9 @@ span:contains("Remainder: ") {
                         <a href="editpersonal?id=<%= task.getTaskId() %>"><button class="edit-task">Edit</button></a>
                         <a href="deletepersonal?id=<%= task.getTaskId() %>"><button class="delete-task">Delete</button></a>
                     </div>
-                </div>
+                   
+</div>
+             
                 <%
             }
         } else {
@@ -173,6 +186,25 @@ span:contains("Remainder: ") {
         <%
         }
         %>
+         <div class="pagination-buttons">
+    <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>"><<</a>
+    <% } else { %>
+        <span class="disabled"><<</span>
+    <% } %>
+
+    <% for (int j = 1; j <= totalPages; j++) { %>
+        <a href="?page=<%= j %>" <%= (j == currentPage) ? "class='active'" : "" %>><%= j %></a>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>">>></a>
+    <% } else { %>
+        <span class="disabled">>></span>
+    <% } %>
+</div>
+        
+
     </div>
 </body>
 </html>

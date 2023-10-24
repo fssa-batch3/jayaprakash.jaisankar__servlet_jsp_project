@@ -9,8 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Tasks</title>
+   
     
-    <!-- Link to your external CSS files -->
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/page.css" />
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/style2.css" />
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/listtask.css" />
 </head>
@@ -21,14 +22,22 @@
     HttpSession ses = request.getSession();
     Long userId = (Long) ses.getAttribute("userId");
     String taskAssignee = (String) ses.getAttribute("taskassignee");
+    List<Task> taskList = (List<Task>) request.getAttribute("taskList");
+    
+    int pageSize = 2; 
+    int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+    int totalTasks = taskList.size();
+    int totalPages = (int) Math.ceil((double) totalTasks / pageSize);
+    int startIndex = (currentPage - 1) * pageSize;
+    int endIndex = Math.min(startIndex + pageSize, totalTasks);
 %>
 
 <div class="container">
     <h1 class="task-status">List of Tasks</h1>
     <% 
-        List<Task> taskList = (List<Task>) request.getAttribute("taskList");
-        if (taskList != null) {
-            for (Task task : taskList) {
+          if (taskList != null) {
+        	 for (int i = startIndex; i < endIndex; i++) {
+        		 Task task = taskList.get(i);
                 boolean isTaskAssignee = task.isAssignee(taskAssignee);
     %>
     <div class="task-item">
@@ -79,6 +88,24 @@ if (isTaskAssignee) {
             }
         }
     %>
+
+<div class="pagination-buttons">
+    <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>"><<</a>
+    <% } else { %>
+        <span class="disabled"><<</span>
+    <% } %>
+
+    <% for (int i = 1; i <= totalPages; i++) { %>
+        <a href="?page=<%= i %>" <%= (i == currentPage) ? "class='active'" : "" %>><%= i %></a>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>">>></a>
+    <% } else { %>
+        <span class="disabled">>></span>
+    <% } %>
+</div>
 </div>
 </body>
 </html>

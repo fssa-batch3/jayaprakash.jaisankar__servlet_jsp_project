@@ -65,8 +65,7 @@
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Category</a></li>
             <li><a href="<%=request.getContextPath()%>/pages/PersonalTasks.jsp">Personal Tasks</a></li>
-            <li><a href="#">Professional Tasks</a></li>
-            <li><a href="#">Academic Tasks</a></li>
+           
           </ul>
         </li>
         <li>

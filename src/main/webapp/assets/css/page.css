@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+
+.pagination-buttons {
+    text-align: center;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.pagination-buttons a, .pagination-buttons span {
+    display: inline-block;
+    width: 30px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+    line-height: 30px; /* Center the text vertically */
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: #fff; /* Default background color for numbers */
+}
+.pagination-buttons a.active {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.pagination-buttons span.disabled {
+    background-color: #f2f2f2;
+    color: #666;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-buttons a.prev, .pagination-buttons a.next {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.pagination-buttons a:not(.previous):not(.next):hover {
+    background-color: #f2f2f2;
+}
+
+    
