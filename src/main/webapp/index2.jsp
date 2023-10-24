@@ -28,7 +28,34 @@ body #change {
     background-color: black;
     
 }
-
+  #searchForm {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bx-search {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .form-control {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        #searchInput {
+            flex-grow: 1;
+        }
+        
+       #submit {
+            background-color: #0077b6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 .bx-moon {
     font-size: 24px;
 }
@@ -41,7 +68,7 @@ body #change {
 
 i.bx-search {
     margin-right: -2px;
-    padding-top:0px;
+    
 }
 
 input.form-control.mr-sm-2 {
@@ -138,7 +165,7 @@ button[type="submit"] {
           </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="<%=request.getContextPath()%>/calendargoogle">
             <i class="bx bx-cog"></i>
             <span class="link_name">Settings</span>
           </a>
@@ -188,19 +215,20 @@ button[type="submit"] {
           <i class="bx bx-plus"></i>&nbsp;Add project task
         </button>
         
-       <form id="search" action="<%= request.getContextPath() %>/searchtask" method="GET">
-        <i class="bx bx-search"></i
-        >
+<form id="searchForm" action="<%= request.getContextPath() %>/searchtask" method="GET">
+    <i class="bx bx-search"></i>
     <input
         class="form-control mr-sm-2"
         type="search"
         placeholder="Search Todo By Assignee's Gmail"
-        id="search"
         aria-label="Search"
         name="assigneeEmail"
+        id="searchInput"
     />
-    <button type="submit">Search</button>
+    <button id="submit" type="submit">Search</button>
 </form>
+
+
 
       </div>
 
@@ -209,14 +237,7 @@ button[type="submit"] {
           <h1 class="todohead">All project's</h1>
         </div>
         </div>
-        <form action="<%= request.getContextPath() %>/calendar" method="GET">
-        <div  class="flex-sort">
-        <label>Search Task:</label>   
-        <input type="date">
-        
-        <button>Search</button>
-        </div>
-</form>
+       
      
 <%
 	String errorMessage = request.getParameter("errorMessage");
@@ -357,6 +378,18 @@ button[type="submit"] {
         }
 
     </script> 
+    <script>
+    document.getElementById("searchForm").addEventListener("submit", function (event) {
+        var emailInput = document.getElementById("searchInput");
+        var email = emailInput.value;
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            event.preventDefault(); // Prevent the form submission if the email is not valid.
+        }
+    });
+</script>
     <script>
         const darkModeToggle = document.getElementById('change');
         let isDarkModeOn = false;

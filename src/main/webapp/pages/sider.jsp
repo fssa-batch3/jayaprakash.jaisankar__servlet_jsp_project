@@ -105,7 +105,7 @@
           </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="<%=request.getContextPath()%>/calendargoogle">
             <i class="bx bx-cog"></i>
             <span class="link_name">Settings</span>
           </a>

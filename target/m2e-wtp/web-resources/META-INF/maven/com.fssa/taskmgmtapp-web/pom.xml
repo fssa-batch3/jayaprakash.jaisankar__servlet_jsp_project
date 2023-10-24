@@ -15,6 +15,12 @@
 	</properties>
  <dependencies>
 	 <!-- JBCrypt library for password hashing -->
+	 <dependency>
+    <groupId>com.google.api-client</groupId>
+    <artifactId>google-api-client</artifactId>
+    <version>1.31.1</version> <!-- Use the appropriate version -->
+</dependency>
+	
 		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>

@@ -50,7 +50,7 @@
   .vh-100{
   margin-top:-69px;
   }
-  form{
+  #form{
   margin-top:120px;
   }
   .up{
@@ -74,7 +74,7 @@
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           
-    <form action="<%= request.getContextPath() %>//ProfileServlet" method="post" onsubmit="return validateForm()">
+    <form id="form"action="<%= request.getContextPath() %>//ProfileServlet" method="post" onsubmit="return validateForm()">
         <%
 	String errorMessage = request.getParameter("errorMessage");
 	if (errorMessage != null) {

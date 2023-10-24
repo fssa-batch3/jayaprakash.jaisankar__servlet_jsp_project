@@ -31,11 +31,69 @@
 .display-block {
     display: block;
 }
+   body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+#form {
+    max-width: 600px;
+    margin-left: 350px;
+    margin-top:200px;
+    
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.update {
+margin-top:120px;
+margin-left:-180px;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.update:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    #form {
+        padding: 10px;
+    }
+}
     
     </style>
   </head>
   <body>
   
+  <jsp:include page="sider.jsp" />
   
   <form id="form"  action="<%=request.getContextPath()%>/updateTask" method="post">
           

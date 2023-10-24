@@ -49,7 +49,7 @@ public class UserRegistrationServlet extends HttpServlet {
             String resultMessage = userService.registerUser(user);
             if ("Registration Successful".equals(resultMessage)) {
 
-                response.sendRedirect("http://localhost:8080/taskmgmtapp-web/pages/login3.jsp");    
+                response.sendRedirect(request.getContextPath() + "/pages/entryset.jsp");
                 } else {
                 response.getWriter().write(resultMessage);
             }

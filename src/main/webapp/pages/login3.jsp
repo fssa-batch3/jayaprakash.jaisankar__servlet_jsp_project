@@ -128,6 +128,7 @@
             <label class="form-label" for="form3Example4">Password</label>
           </div>
 
+
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
             <div class="form-check mb-0">
