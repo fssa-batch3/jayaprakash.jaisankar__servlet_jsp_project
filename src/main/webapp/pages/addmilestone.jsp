@@ -67,6 +67,7 @@ input[type="submit"]:hover {
     </style>
 </head>
 <body> 
+ <jsp:include page="sider.jsp" />
     <form id="add" action="<%=request.getContextPath()%>/AddMilestoneServlet" method="post">
     	<%
 	String errorMessage = request.getParameter("errorMessage");

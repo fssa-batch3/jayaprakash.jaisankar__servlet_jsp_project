@@ -25,7 +25,7 @@ public class LoginServlet1 extends HttpServlet {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-
+                                              
         try {
             User loggedInUser = userService.loginUser(user);
             if (loggedInUser != null) {

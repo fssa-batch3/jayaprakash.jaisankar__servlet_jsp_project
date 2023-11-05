@@ -91,7 +91,7 @@
             </div>
             <div class="form-outline mb-4">
                 <label for="mobileNumber">Mobile Number:</label>
-                <input type="text" id="mobileNumber" value="${user.mobileNumber}" class="form-control form-control-lg minlength="10" name="mobileNumber" required>
+                <input type="text" id="mobileNumber" value="${user.mobileNumber}"  class="form-control form-control-lg minlength="10" name="mobileNumber" required>
             </div>
               <div class="form-outline mb-4">
               

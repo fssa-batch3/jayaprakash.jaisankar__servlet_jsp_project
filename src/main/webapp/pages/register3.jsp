@@ -114,25 +114,22 @@
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            // Validation for Name
+           
             if (name.trim() === "") {
                 alert("Name cannot be empty");
                 return false;
             }
 
-            // Validation for Gender
             if (gender.trim() !== "M" && gender.trim() !== "F") {
                 alert("Invalid gender. Gender must be 'M' or 'F'");
                 return false;
             }
 
-            // Validation for Mobile Number
             if (!/^\d{10}$/.test(mobileNumber)) {
                 alert("Invalid mobile number. It should be 10 digits");
                 return false;
             }
 
-            // Validation for Date of Birth (Age should be at least 10 years old)
             const dobDate = new Date(dateOfBirth);
             const currentDate = new Date();
             const minValidDate = new Date(currentDate.getFullYear() - 10, currentDate.getMonth(), currentDate.getDate());
@@ -142,20 +139,17 @@
                 return false;
             }
 
-            // Validation for Email
             const emailPattern = /^[A-Za-z0-9+_.-]+@(.+)$/;
             if (!email.match(emailPattern)) {
                 alert("Invalid email format");
                 return false;
             }
-
-            // Validation for Password
             if (password.length < 8) {
                 alert("Password is less than the expected length of 8 characters");
                 return false;
             }
 
-            return true; // Form is valid
+            return true;
         }
     </script>
 </body>
